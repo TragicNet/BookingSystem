@@ -4,40 +4,14 @@
  */
 package com.mycompany.bookingsystem;
 
-import com.mycompany.bookingsystem.Helper.Helper;
-import static com.mycompany.bookingsystem.Helper.Helper.setUIFont;
-import com.mycompany.bookingsystem.Models.Entity.Entity;
-import com.mycompany.bookingsystem.Models.Entity.EntityDao;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.List;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
-import javax.swing.DefaultListModel;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
-import javax.swing.JTable;
 import javax.swing.UIManager;
-import javax.swing.plaf.FontUIResource;
-import javax.swing.table.DefaultTableModel;
-import org.sqlite.util.StringUtils;
 
 /**
  *
@@ -71,13 +45,9 @@ public class Launcher extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
-        typeButtonGroup = new javax.swing.ButtonGroup();
-        acButtonGroup = new javax.swing.ButtonGroup();
-        bookingSlotButtonGroup = new javax.swing.ButtonGroup();
-        statusButtonGroup = new javax.swing.ButtonGroup();
         cardsButtonGroup = new javax.swing.ButtonGroup();
+        ContainerPanel = new javax.swing.JPanel();
         topPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         sidePanel = new javax.swing.JPanel();
@@ -91,15 +61,19 @@ public class Launcher extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         reportsPanel = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        inventoryPanel = new com.mycompany.bookingsystem.InventoryPanel();
+        inventoryPanel = new com.mycompany.bookingsystem.InnerPanels.InventoryPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Booking System");
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(0, 0, 0));
         setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
+        setName("MainFrame"); // NOI18N
         setResizable(false);
 
-        topPanel.setBackground(new java.awt.Color(255, 0, 0));
+        ContainerPanel.setBackground(new java.awt.Color(217, 217, 217));
+        ContainerPanel.setLayout(new java.awt.BorderLayout());
+
+        topPanel.setBackground(new java.awt.Color(60, 110, 113));
         topPanel.setMinimumSize(new java.awt.Dimension(396, 50));
         topPanel.setPreferredSize(new java.awt.Dimension(10, 70));
         topPanel.setLayout(new java.awt.GridBagLayout());
@@ -110,12 +84,15 @@ public class Launcher extends javax.swing.JFrame {
         jLabel4.setText("Hall Booking and Billing System");
         topPanel.add(jLabel4, new java.awt.GridBagConstraints());
 
-        getContentPane().add(topPanel, java.awt.BorderLayout.PAGE_START);
+        ContainerPanel.add(topPanel, java.awt.BorderLayout.PAGE_START);
 
-        sidePanel.setBackground(new java.awt.Color(0, 102, 153));
+        sidePanel.setBackground(new java.awt.Color(40, 75, 99));
         sidePanel.setPreferredSize(new java.awt.Dimension(150, 456));
-        sidePanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 75, 20));
+        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 75, 0);
+        flowLayout1.setAlignOnBaseline(true);
+        sidePanel.setLayout(flowLayout1);
 
+        bookingButton.setBackground(new java.awt.Color(217, 217, 217));
         cardsButtonGroup.add(bookingButton);
         bookingButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         bookingButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -124,7 +101,7 @@ public class Launcher extends javax.swing.JFrame {
         bookingButton.setBorderPainted(false);
         bookingButton.setContentAreaFilled(false);
         bookingButton.setFocusPainted(false);
-        bookingButton.setPreferredSize(new java.awt.Dimension(200, 31));
+        bookingButton.setPreferredSize(new java.awt.Dimension(200, 50));
         bookingButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bookingButtonActionPerformed(evt);
@@ -132,6 +109,7 @@ public class Launcher extends javax.swing.JFrame {
         });
         sidePanel.add(bookingButton);
 
+        billingButton.setBackground(new java.awt.Color(217, 217, 217));
         cardsButtonGroup.add(billingButton);
         billingButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         billingButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -140,7 +118,7 @@ public class Launcher extends javax.swing.JFrame {
         billingButton.setBorderPainted(false);
         billingButton.setContentAreaFilled(false);
         billingButton.setFocusPainted(false);
-        billingButton.setPreferredSize(new java.awt.Dimension(200, 31));
+        billingButton.setPreferredSize(new java.awt.Dimension(200, 50));
         billingButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 billingButtonActionPerformed(evt);
@@ -148,6 +126,7 @@ public class Launcher extends javax.swing.JFrame {
         });
         sidePanel.add(billingButton);
 
+        reportsButton.setBackground(new java.awt.Color(217, 217, 217));
         cardsButtonGroup.add(reportsButton);
         reportsButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         reportsButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -156,7 +135,7 @@ public class Launcher extends javax.swing.JFrame {
         reportsButton.setBorderPainted(false);
         reportsButton.setContentAreaFilled(false);
         reportsButton.setFocusPainted(false);
-        reportsButton.setPreferredSize(new java.awt.Dimension(200, 31));
+        reportsButton.setPreferredSize(new java.awt.Dimension(200, 50));
         reportsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 reportsButtonActionPerformed(evt);
@@ -164,6 +143,7 @@ public class Launcher extends javax.swing.JFrame {
         });
         sidePanel.add(reportsButton);
 
+        inventoryButton.setBackground(new java.awt.Color(217, 217, 217));
         cardsButtonGroup.add(inventoryButton);
         inventoryButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         inventoryButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -172,7 +152,7 @@ public class Launcher extends javax.swing.JFrame {
         inventoryButton.setBorderPainted(false);
         inventoryButton.setContentAreaFilled(false);
         inventoryButton.setFocusPainted(false);
-        inventoryButton.setPreferredSize(new java.awt.Dimension(200, 31));
+        inventoryButton.setPreferredSize(new java.awt.Dimension(200, 50));
         inventoryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inventoryButtonActionPerformed(evt);
@@ -180,6 +160,7 @@ public class Launcher extends javax.swing.JFrame {
         });
         sidePanel.add(inventoryButton);
 
+        exitButton.setBackground(new java.awt.Color(217, 217, 217));
         cardsButtonGroup.add(exitButton);
         exitButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         exitButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -188,7 +169,7 @@ public class Launcher extends javax.swing.JFrame {
         exitButton.setBorderPainted(false);
         exitButton.setContentAreaFilled(false);
         exitButton.setFocusPainted(false);
-        exitButton.setPreferredSize(new java.awt.Dimension(200, 31));
+        exitButton.setPreferredSize(new java.awt.Dimension(200, 50));
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitButtonActionPerformed(evt);
@@ -196,11 +177,13 @@ public class Launcher extends javax.swing.JFrame {
         });
         sidePanel.add(exitButton);
 
-        getContentPane().add(sidePanel, java.awt.BorderLayout.LINE_START);
+        ContainerPanel.add(sidePanel, java.awt.BorderLayout.LINE_START);
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
+        mainPanel.setOpaque(false);
         mainPanel.setLayout(new java.awt.CardLayout());
 
+        bookingPanel.setBackground(new java.awt.Color(217, 217, 217));
         bookingPanel.setOpaque(false);
         bookingPanel.setPreferredSize(new java.awt.Dimension(1395, 700));
 
@@ -251,7 +234,9 @@ public class Launcher extends javax.swing.JFrame {
         mainPanel.add(reportsPanel, "reports");
         mainPanel.add(inventoryPanel, "inventory");
 
-        getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
+        ContainerPanel.add(mainPanel, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(ContainerPanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -349,15 +334,14 @@ public class Launcher extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup acButtonGroup;
+    private javax.swing.JPanel ContainerPanel;
     private javax.swing.JToggleButton billingButton;
     private javax.swing.JToggleButton bookingButton;
     private javax.swing.JPanel bookingPanel;
-    private javax.swing.ButtonGroup bookingSlotButtonGroup;
     private javax.swing.ButtonGroup cardsButtonGroup;
     private javax.swing.JToggleButton exitButton;
     private javax.swing.JToggleButton inventoryButton;
-    private com.mycompany.bookingsystem.InventoryPanel inventoryPanel;
+    private com.mycompany.bookingsystem.InnerPanels.InventoryPanel inventoryPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel4;
@@ -365,9 +349,7 @@ public class Launcher extends javax.swing.JFrame {
     private javax.swing.JToggleButton reportsButton;
     private javax.swing.JPanel reportsPanel;
     private javax.swing.JPanel sidePanel;
-    private javax.swing.ButtonGroup statusButtonGroup;
     private javax.swing.JPanel topPanel;
-    private javax.swing.ButtonGroup typeButtonGroup;
     // End of variables declaration//GEN-END:variables
 
 

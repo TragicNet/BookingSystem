@@ -4,15 +4,12 @@
  */
 package com.mycompany.bookingsystem;
 
-import java.awt.Dimension;
-import javax.swing.JFrame;
-
 /**
  *
  * @author TragicNet
  */
 public class Test extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form Test
      */
@@ -28,9 +25,6 @@ public class Test extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
-
-        inventoryPanel = new com.mycompany.bookingsystem.InventoryPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -38,17 +32,11 @@ public class Test extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(inventoryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(inventoryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
         pack();
@@ -84,21 +72,11 @@ public class Test extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Test frame = new Test();
-//                frame.add(inventoryPanel);
-                int WIDTH = 900, HEIGHT = 600;
-                frame.setSize(WIDTH, HEIGHT);
-                frame.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-                frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                frame.setLocationRelativeTo(null);
-                
-                frame.pack();
-                frame.setVisible(true);
+                new Test().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.mycompany.bookingsystem.InventoryPanel inventoryPanel;
     // End of variables declaration//GEN-END:variables
 }

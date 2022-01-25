@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.mycompany.bookingsystem;
+package com.mycompany.bookingsystem.InnerPanels;
 
 import com.mycompany.bookingsystem.Helper.Helper;
+import com.mycompany.bookingsystem.Launcher;
 import com.mycompany.bookingsystem.Models.Entity.Entity;
 import com.mycompany.bookingsystem.Models.Entity.EntityDao;
 import java.sql.SQLException;
@@ -358,7 +359,6 @@ public class InventoryPanel extends javax.swing.JPanel {
         jLabel6.setText("Name");
 
         nameField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        nameField.setOpaque(true);
         nameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameFieldActionPerformed(evt);
@@ -987,7 +987,7 @@ public class InventoryPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(formPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(entityListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE))
+                    .addComponent(entityListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -1201,12 +1201,9 @@ public class InventoryPanel extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(Launcher.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        System.out.println(entityList);
+
         for ( Entity e: entityList) {
             entityListModel.addElement(e.getName());
-//            for (int i = 0; i < 10  ; i++) {
-//                entityListModel.addElement(e.getName());
-//            }
         }
     }
     
