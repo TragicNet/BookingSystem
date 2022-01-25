@@ -1,10 +1,7 @@
 package com.mycompany.bookingsystem.Database;
 
-import com.mycompany.bookingsystem.Models.Entity.EntityDao;
 import java.io.File;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public abstract class DatabaseConnection {
     

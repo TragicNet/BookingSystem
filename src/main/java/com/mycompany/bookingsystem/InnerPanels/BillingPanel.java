@@ -4,17 +4,10 @@
  */
 package com.mycompany.bookingsystem.InnerPanels;
 
-import com.mycompany.bookingsystem.Helper.Helper;
-import com.mycompany.bookingsystem.Launcher;
 import com.mycompany.bookingsystem.Models.Entity.Entity;
 import com.mycompany.bookingsystem.Models.Entity.EntityDao;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
 /**

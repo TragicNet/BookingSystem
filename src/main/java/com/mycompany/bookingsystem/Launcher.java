@@ -19,7 +19,7 @@ import javax.swing.UIManager;
  */
 public class Launcher extends javax.swing.JFrame {
     
-    private CardLayout cardLayout;
+    private final CardLayout cardLayout;
     
     /**
      * Creates new form Launcher
@@ -47,7 +47,7 @@ public class Launcher extends javax.swing.JFrame {
     private void initComponents() {
 
         cardsButtonGroup = new javax.swing.ButtonGroup();
-        ContainerPanel = new javax.swing.JPanel();
+        containerPanel = new javax.swing.JPanel();
         topPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         sidePanel = new javax.swing.JPanel();
@@ -56,6 +56,7 @@ public class Launcher extends javax.swing.JFrame {
         reportsButton = new javax.swing.JToggleButton();
         inventoryButton = new javax.swing.JToggleButton();
         exitButton = new javax.swing.JToggleButton();
+        mainContainerPanel = new javax.swing.JPanel();
         mainPanel = new javax.swing.JPanel();
         bookingPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -70,8 +71,8 @@ public class Launcher extends javax.swing.JFrame {
         setName("MainFrame"); // NOI18N
         setResizable(false);
 
-        ContainerPanel.setBackground(new java.awt.Color(217, 217, 217));
-        ContainerPanel.setLayout(new java.awt.BorderLayout());
+        containerPanel.setBackground(new java.awt.Color(217, 217, 217));
+        containerPanel.setLayout(new java.awt.BorderLayout());
 
         topPanel.setBackground(new java.awt.Color(60, 110, 113));
         topPanel.setMinimumSize(new java.awt.Dimension(396, 50));
@@ -84,7 +85,7 @@ public class Launcher extends javax.swing.JFrame {
         jLabel4.setText("Hall Booking and Billing System");
         topPanel.add(jLabel4, new java.awt.GridBagConstraints());
 
-        ContainerPanel.add(topPanel, java.awt.BorderLayout.PAGE_START);
+        containerPanel.add(topPanel, java.awt.BorderLayout.PAGE_START);
 
         sidePanel.setBackground(new java.awt.Color(40, 75, 99));
         sidePanel.setPreferredSize(new java.awt.Dimension(150, 456));
@@ -177,9 +178,14 @@ public class Launcher extends javax.swing.JFrame {
         });
         sidePanel.add(exitButton);
 
-        ContainerPanel.add(sidePanel, java.awt.BorderLayout.LINE_START);
+        containerPanel.add(sidePanel, java.awt.BorderLayout.LINE_START);
+
+        mainContainerPanel.setBackground(new java.awt.Color(217, 217, 217));
+        mainContainerPanel.setOpaque(false);
+        mainContainerPanel.setPreferredSize(new java.awt.Dimension(1395, 700));
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
+        mainPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(40, 75, 99), 2, true));
         mainPanel.setOpaque(false);
         mainPanel.setLayout(new java.awt.CardLayout());
 
@@ -197,14 +203,14 @@ public class Launcher extends javax.swing.JFrame {
             .addGroup(bookingPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(1898, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         bookingPanelLayout.setVerticalGroup(
             bookingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bookingPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(1084, Short.MAX_VALUE))
+                .addContainerGap(539, Short.MAX_VALUE))
         );
 
         mainPanel.add(bookingPanel, "booking");
@@ -221,22 +227,39 @@ public class Launcher extends javax.swing.JFrame {
             .addGroup(reportsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel11)
-                .addContainerGap(1902, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         reportsPanelLayout.setVerticalGroup(
             reportsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(reportsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel11)
-                .addContainerGap(1084, Short.MAX_VALUE))
+                .addContainerGap(539, Short.MAX_VALUE))
         );
 
         mainPanel.add(reportsPanel, "reports");
         mainPanel.add(inventoryPanel, "inventory");
 
-        ContainerPanel.add(mainPanel, java.awt.BorderLayout.CENTER);
+        javax.swing.GroupLayout mainContainerPanelLayout = new javax.swing.GroupLayout(mainContainerPanel);
+        mainContainerPanel.setLayout(mainContainerPanelLayout);
+        mainContainerPanelLayout.setHorizontalGroup(
+            mainContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainContainerPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1800, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        mainContainerPanelLayout.setVerticalGroup(
+            mainContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainContainerPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
-        getContentPane().add(ContainerPanel, java.awt.BorderLayout.CENTER);
+        containerPanel.add(mainContainerPanel, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(containerPanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -334,17 +357,18 @@ public class Launcher extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel ContainerPanel;
     private javax.swing.JToggleButton billingButton;
     private javax.swing.JToggleButton bookingButton;
     private javax.swing.JPanel bookingPanel;
     private javax.swing.ButtonGroup cardsButtonGroup;
+    private javax.swing.JPanel containerPanel;
     private javax.swing.JToggleButton exitButton;
     private javax.swing.JToggleButton inventoryButton;
     private com.mycompany.bookingsystem.InnerPanels.InventoryPanel inventoryPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel mainContainerPanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JToggleButton reportsButton;
     private javax.swing.JPanel reportsPanel;
