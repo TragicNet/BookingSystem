@@ -25,7 +25,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="inventoryPanel1" min="-2" max="-2" attributes="0"/>
+              <Component id="inventoryPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -34,14 +34,14 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="inventoryPanel1" min="-2" max="-2" attributes="0"/>
+              <Component id="inventoryPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="com.mycompany.bookingsystem.InventoryPanel" name="inventoryPanel1">
+    <Component class="com.mycompany.bookingsystem.InventoryPanel" name="inventoryPanel">
     </Component>
   </SubComponents>
 </Form>

@@ -45,39 +45,39 @@ public class InventoryPanel extends javax.swing.JPanel {
     public InventoryPanel() {
         initComponents();
         
-//        typeButtons = new JRadioButton[4];
-//        typeButtons[0] = hallRadioButton;
-//        typeButtons[1] = roomRadioButton;
-//        typeButtons[2] = spaceRadioButton;
-//        typeButtons[3] = equipmentRadioButton;
-//        
-//        bookingSlotButtons = new JRadioButton[2];
-//        bookingSlotButtons[1] = fullDayRadioButton;
-//        bookingSlotButtons[0] = halfDayRadioButton;
-//        
-//        acButtons = new JRadioButton[2];
-//        acButtons[1] = acYesRadioButton;
-//        acButtons[0] = halfDayRadioButton;
-//        
-//        statusButtons = new JRadioButton[2];
-//        statusButtons[1] = activeRadioButton;
-//        statusButtons[0] = inActiveRadioButton;
-//        
-//        typeButtons[0].doClick();
-//        
-////        customizeComponents();
-//        
-//        entityDao = new EntityDao();
-//
-//        try {
-//            entityList = (ArrayList<Entity>) entityDao.getAll();
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        }
-//        
-//        entityListModel = new DefaultListModel<>();
-//        entityJList.setModel(entityListModel);
-//        refreshEntityList();
+        typeButtons = new JRadioButton[4];
+        typeButtons[0] = hallRadioButton;
+        typeButtons[1] = roomRadioButton;
+        typeButtons[2] = spaceRadioButton;
+        typeButtons[3] = equipmentRadioButton;
+        
+        bookingSlotButtons = new JRadioButton[2];
+        bookingSlotButtons[1] = fullDayRadioButton;
+        bookingSlotButtons[0] = halfDayRadioButton;
+        
+        acButtons = new JRadioButton[2];
+        acButtons[1] = acYesRadioButton;
+        acButtons[0] = halfDayRadioButton;
+        
+        statusButtons = new JRadioButton[2];
+        statusButtons[1] = activeRadioButton;
+        statusButtons[0] = inActiveRadioButton;
+        
+        typeButtons[0].doClick();
+        
+//        customizeComponents();
+        
+        entityDao = new EntityDao();
+
+        try {
+            entityList = (ArrayList<Entity>) entityDao.getAll();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        entityListModel = new DefaultListModel<>();
+        entityJList.setModel(entityListModel);
+        refreshEntityList();
         
     }
 
@@ -171,14 +171,17 @@ public class InventoryPanel extends javax.swing.JPanel {
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1683, 700));
 
+        entityListPanel.setBackground(new java.awt.Color(255, 255, 255));
         entityListPanel.setOpaque(false);
         entityListPanel.setPreferredSize(new java.awt.Dimension(250, 688));
         entityListPanel.setVerifyInputWhenFocusTarget(false);
 
-        jScrollPane2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane2.setBorder(null);
         jScrollPane2.setOpaque(false);
         jScrollPane2.getViewport().setOpaque(false);
 
+        entityJList.setBorder(null);
         entityJList.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         entityJList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -242,19 +245,19 @@ public class InventoryPanel extends javax.swing.JPanel {
         entityListPanelLayout.setHorizontalGroup(
             entityListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(entityListPanelLayout.createSequentialGroup()
-                .addGroup(entityListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(entityListPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(entityListPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
         );
         entityListPanelLayout.setVerticalGroup(
             entityListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(entityListPanelLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
                 .addContainerGap())
         );
 
@@ -657,8 +660,8 @@ public class InventoryPanel extends javax.swing.JPanel {
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         formPanel.add(costPanel, gridBagConstraints);
         amountPanel.setVisible(false);
@@ -694,8 +697,8 @@ public class InventoryPanel extends javax.swing.JPanel {
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         formPanel.add(chargePanel, gridBagConstraints);
         amountPanel.setVisible(false);
@@ -973,18 +976,20 @@ public class InventoryPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(entityListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(entityListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(formPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1051, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(354, Short.MAX_VALUE))
+                .addComponent(formPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(entityListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(formPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(formPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(entityListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1189,21 +1194,21 @@ public class InventoryPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_entityComboBoxActionPerformed
 
     private void refreshEntityList() {
-//        entityListModel.removeAllElements();
-//        entityList.clear();
-//        int typeIndex = entityComboBox.getSelectedIndex();
-//        try {
-//            entityList = (ArrayList<Entity>) entityDao.select(selectQuery[typeIndex]);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(Launcher.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-////        System.out.println(entityList);
-//        for ( Entity e: entityList) {
-//            entityListModel.addElement(e.getName());
-////            for (int i = 0; i < 10  ; i++) {
-////                entityListModel.addElement(e.getName());
-////            }
-//        }
+        entityListModel.removeAllElements();
+        entityList.clear();
+        int typeIndex = entityComboBox.getSelectedIndex();
+        try {
+            entityList = (ArrayList<Entity>) entityDao.select(selectQuery[typeIndex]);
+        } catch (SQLException ex) {
+            Logger.getLogger(Launcher.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        System.out.println(entityList);
+        for ( Entity e: entityList) {
+            entityListModel.addElement(e.getName());
+//            for (int i = 0; i < 10  ; i++) {
+//                entityListModel.addElement(e.getName());
+//            }
+        }
     }
     
 
