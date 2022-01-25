@@ -1829,6 +1829,9 @@ public class Launcher extends javax.swing.JFrame {
 //        System.out.println(entityList);
         for ( Entity e: entityList) {
             entityListModel.addElement(e.getName());
+//            for (int i = 0; i < 10  ; i++) {
+//                entityListModel.addElement(e.getName());
+//            }
         }
     }
 
