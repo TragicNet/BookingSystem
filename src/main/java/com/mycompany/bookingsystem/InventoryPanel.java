@@ -171,13 +171,12 @@ public class InventoryPanel extends javax.swing.JPanel {
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1683, 700));
 
-        entityListPanel.setBackground(new java.awt.Color(255, 255, 255));
         entityListPanel.setOpaque(false);
         entityListPanel.setPreferredSize(new java.awt.Dimension(250, 688));
         entityListPanel.setVerifyInputWhenFocusTarget(false);
 
-        jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setBorder(null);
+        jScrollPane2.setViewportBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 2, true));
         jScrollPane2.setOpaque(false);
         jScrollPane2.getViewport().setOpaque(false);
 
