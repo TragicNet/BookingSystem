@@ -19,7 +19,6 @@ public abstract class DatabaseConnection {
         try {
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection(url);
-            System.out.println(connection);
             createTables();
         } catch (SQLException e) {
             e.printStackTrace();

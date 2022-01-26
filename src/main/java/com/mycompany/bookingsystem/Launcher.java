@@ -4,6 +4,8 @@
  */
 package com.mycompany.bookingsystem;
 
+import com.mycompany.bookingsystem.InnerPanels.BookingPanel;
+import com.mycompany.bookingsystem.InnerPanels.InventoryPanel;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -20,6 +22,8 @@ import javax.swing.UIManager;
 public class Launcher extends javax.swing.JFrame {
     
     private final CardLayout cardLayout;
+    private final InventoryPanel inventoryPanel;
+    private final BookingPanel bookingPanel;
     
     /**
      * Creates new form Launcher
@@ -27,6 +31,12 @@ public class Launcher extends javax.swing.JFrame {
     public Launcher() {
         initComponents();
 
+        bookingPanel = new BookingPanel(this);
+        inventoryPanel = new InventoryPanel(this);
+        
+        mainPanel.add(bookingPanel, "booking");
+        mainPanel.add(inventoryPanel, "inventory");
+        
         cardLayout = new CardLayout();
         mainPanel.setLayout(cardLayout);
         mainPanel.add(bookingPanel, "booking");
@@ -58,11 +68,8 @@ public class Launcher extends javax.swing.JFrame {
         exitButton = new javax.swing.JToggleButton();
         mainContainerPanel = new javax.swing.JPanel();
         mainPanel = new javax.swing.JPanel();
-        bookingPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         reportsPanel = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        inventoryPanel = new com.mycompany.bookingsystem.InnerPanels.InventoryPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Booking System");
@@ -189,32 +196,6 @@ public class Launcher extends javax.swing.JFrame {
         mainPanel.setOpaque(false);
         mainPanel.setLayout(new java.awt.CardLayout());
 
-        bookingPanel.setBackground(new java.awt.Color(217, 217, 217));
-        bookingPanel.setOpaque(false);
-        bookingPanel.setPreferredSize(new java.awt.Dimension(1395, 700));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setText("Booking");
-
-        javax.swing.GroupLayout bookingPanelLayout = new javax.swing.GroupLayout(bookingPanel);
-        bookingPanel.setLayout(bookingPanelLayout);
-        bookingPanelLayout.setHorizontalGroup(
-            bookingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bookingPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        bookingPanelLayout.setVerticalGroup(
-            bookingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bookingPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(539, Short.MAX_VALUE))
-        );
-
-        mainPanel.add(bookingPanel, "booking");
-
         reportsPanel.setOpaque(false);
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -227,18 +208,17 @@ public class Launcher extends javax.swing.JFrame {
             .addGroup(reportsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel11)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(2305, Short.MAX_VALUE))
         );
         reportsPanelLayout.setVerticalGroup(
             reportsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(reportsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel11)
-                .addContainerGap(539, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         mainPanel.add(reportsPanel, "reports");
-        mainPanel.add(inventoryPanel, "inventory");
 
         javax.swing.GroupLayout mainContainerPanelLayout = new javax.swing.GroupLayout(mainContainerPanel);
         mainContainerPanel.setLayout(mainContainerPanelLayout);
@@ -246,14 +226,14 @@ public class Launcher extends javax.swing.JFrame {
             mainContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainContainerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1800, Short.MAX_VALUE)
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         mainContainerPanelLayout.setVerticalGroup(
             mainContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainContainerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -287,7 +267,7 @@ public class Launcher extends javax.swing.JFrame {
     }//GEN-LAST:event_billingButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void selectCardButton() {
@@ -359,13 +339,10 @@ public class Launcher extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton billingButton;
     private javax.swing.JToggleButton bookingButton;
-    private javax.swing.JPanel bookingPanel;
     private javax.swing.ButtonGroup cardsButtonGroup;
     private javax.swing.JPanel containerPanel;
     private javax.swing.JToggleButton exitButton;
     private javax.swing.JToggleButton inventoryButton;
-    private com.mycompany.bookingsystem.InnerPanels.InventoryPanel inventoryPanel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel mainContainerPanel;
