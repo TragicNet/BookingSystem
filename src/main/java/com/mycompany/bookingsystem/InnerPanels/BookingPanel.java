@@ -150,7 +150,7 @@ public class BookingPanel extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         typeComboBox = new javax.swing.JComboBox<>();
         durationComboBox = new javax.swing.JComboBox<>();
-        refreshButton = new javax.swing.JButton();
+        searchButton = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         entityJList = new javax.swing.JList<>();
         tableContextMenu = new javax.swing.JPopupMenu();
@@ -172,8 +172,10 @@ public class BookingPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         mobile2Panel = new javax.swing.JPanel();
         mobile2Field = new javax.swing.JTextField();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(8, 0), new java.awt.Dimension(8, 0), new java.awt.Dimension(8, 32767));
         emailPanel = new javax.swing.JPanel();
         emailField = new javax.swing.JTextField();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(8, 0), new java.awt.Dimension(8, 0), new java.awt.Dimension(8, 32767));
         eventDetailsPanel = new javax.swing.JPanel();
         eventDetailsField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -455,18 +457,18 @@ public class BookingPanel extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         jPanel5.add(durationComboBox, gridBagConstraints);
 
-        refreshButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        refreshButton.setText("Refresh");
-        refreshButton.addActionListener(new java.awt.event.ActionListener() {
+        searchButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        searchButton.setText("Search");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshButtonActionPerformed(evt);
+                searchButtonActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        jPanel5.add(refreshButton, gridBagConstraints);
+        jPanel5.add(searchButton, gridBagConstraints);
 
         jScrollPane4.setBorder(null);
         jScrollPane4.setViewportBorder(new javax.swing.border.LineBorder(new java.awt.Color(40, 75, 99), 2, true));
@@ -597,10 +599,10 @@ public class BookingPanel extends javax.swing.JPanel {
             namePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(namePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         namePanelLayout.setVerticalGroup(
             namePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -616,6 +618,7 @@ public class BookingPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -638,10 +641,10 @@ public class BookingPanel extends javax.swing.JPanel {
             addressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addressPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         addressPanelLayout.setVerticalGroup(
             addressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -657,6 +660,7 @@ public class BookingPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -709,6 +713,7 @@ public class BookingPanel extends javax.swing.JPanel {
 
         mobile2Field.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         mobile2Field.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        mobile2Field.setPreferredSize(new java.awt.Dimension(202, 31));
         mobile2Field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mobile2FieldActionPerformed(evt);
@@ -721,20 +726,24 @@ public class BookingPanel extends javax.swing.JPanel {
             mobile2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mobile2PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mobile2Field, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(mobile2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         mobile2PanelLayout.setVerticalGroup(
             mobile2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mobile2PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mobile2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(mobile2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mobile2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -755,14 +764,17 @@ public class BookingPanel extends javax.swing.JPanel {
             emailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(emailPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         emailPanelLayout.setVerticalGroup(
             emailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(emailPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(emailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -770,6 +782,7 @@ public class BookingPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -794,7 +807,7 @@ public class BookingPanel extends javax.swing.JPanel {
             eventDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(eventDetailsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(eventDetailsField, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(eventDetailsField, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -813,6 +826,7 @@ public class BookingPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -864,7 +878,7 @@ public class BookingPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 40);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 38);
         jPanel1.add(mobile2Label, gridBagConstraints);
 
         typePanel.setOpaque(false);
@@ -949,6 +963,7 @@ public class BookingPanel extends javax.swing.JPanel {
 
         billNumberField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         billNumberField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        billNumberField.setPreferredSize(new java.awt.Dimension(200, 31));
         billNumberField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 billNumberFieldActionPerformed(evt);
@@ -961,7 +976,7 @@ public class BookingPanel extends javax.swing.JPanel {
             billNumberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(billNumberPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(billNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(billNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         billNumberPanelLayout.setVerticalGroup(
@@ -982,6 +997,7 @@ public class BookingPanel extends javax.swing.JPanel {
         billDatePanel.setOpaque(false);
 
         billDatePicker.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        billDatePicker.setPreferredSize(new java.awt.Dimension(200, 33));
 
         javax.swing.GroupLayout billDatePanelLayout = new javax.swing.GroupLayout(billDatePanel);
         billDatePanel.setLayout(billDatePanelLayout);
@@ -1055,6 +1071,7 @@ public class BookingPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        entityTable.setToolTipText("");
         entityTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         entityTable.setDefaultRenderer(Object.class, new TableCellRenderer());
         entityTable.setRowHeight(24);
@@ -1098,15 +1115,13 @@ public class BookingPanel extends javax.swing.JPanel {
         startDatePanel.setOpaque(false);
 
         startDatePicker.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        startDatePicker.setPreferredSize(new java.awt.Dimension(200, 33));
 
         javax.swing.GroupLayout startDatePanelLayout = new javax.swing.GroupLayout(startDatePanel);
         startDatePanel.setLayout(startDatePanelLayout);
         startDatePanelLayout.setHorizontalGroup(
             startDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, startDatePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(startDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(startDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 206, Short.MAX_VALUE)
         );
         startDatePanelLayout.setVerticalGroup(
             startDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1134,22 +1149,27 @@ public class BookingPanel extends javax.swing.JPanel {
         endDatePanel.setOpaque(false);
 
         endDatePicker.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        endDatePicker.setPreferredSize(new java.awt.Dimension(200, 33));
+        endDatePicker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                endDatePickerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout endDatePanelLayout = new javax.swing.GroupLayout(endDatePanel);
         endDatePanel.setLayout(endDatePanelLayout);
         endDatePanelLayout.setHorizontalGroup(
             endDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, endDatePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(endDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(endDatePanelLayout.createSequentialGroup()
+                .addComponent(endDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 206, Short.MAX_VALUE)
                 .addContainerGap())
         );
         endDatePanelLayout.setVerticalGroup(
             endDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, endDatePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(endDatePanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(endDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1205,10 +1225,10 @@ public class BookingPanel extends javax.swing.JPanel {
                         .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(6, 6, 6))))
         );
         jPanel3Layout.setVerticalGroup(
@@ -1411,7 +1431,7 @@ public class BookingPanel extends javax.swing.JPanel {
             acNoRadioButton.setSelected(true);
         }
         
-        refreshButton.doClick();
+        searchButton.doClick();
         int id = (int) model.getValueAt(r, 10);
         for(int i = 0; i < entityList.size(); i++) {
             if(entityList.get(i).getId() == id) {
@@ -1431,10 +1451,14 @@ public class BookingPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_editMenuItemActionPerformed
 
     private void removeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeMenuItemActionPerformed
-        DefaultTableModel model = (DefaultTableModel) entityTable.getModel();
-        model.removeRow(entityTable.getSelectedRow());
-        for(int i = 0; i < model.getRowCount(); i++) {
-            model.setValueAt(i + 1, i, 0);
+        int result = JOptionPane.showConfirmDialog(null, "Confirm Remove?",
+            String.valueOf(JOptionPane.WARNING_MESSAGE),JOptionPane.OK_CANCEL_OPTION);
+        if(result == JOptionPane.YES_OPTION){
+            DefaultTableModel model = (DefaultTableModel) entityTable.getModel();
+            model.removeRow(entityTable.getSelectedRow());
+            for(int i = 0; i < model.getRowCount(); i++) {
+                model.setValueAt(i + 1, i, 0);
+            }
         }
     }//GEN-LAST:event_removeMenuItemActionPerformed
 
@@ -1487,10 +1511,10 @@ public class BookingPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_durationComboBoxActionPerformed
 
-    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         refreshEntityList();
         entityJList.setSelectedIndex(0);
-    }//GEN-LAST:event_refreshButtonActionPerformed
+    }//GEN-LAST:event_searchButtonActionPerformed
 
     private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButtonActionPerformed
         if(!Helper.isValidText(nameField.getText())) {
@@ -1604,6 +1628,10 @@ public class BookingPanel extends javax.swing.JPanel {
         this.reset();
         this.revalidate();
     }//GEN-LAST:event_clearButtonActionPerformed
+
+    private void endDatePickerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endDatePickerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_endDatePickerActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup acButtonGroup;
@@ -1642,6 +1670,8 @@ public class BookingPanel extends javax.swing.JPanel {
     private javax.swing.JTextField eventDetailsField;
     private javax.swing.JLabel eventDetailsLabel;
     private javax.swing.JPanel eventDetailsPanel;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1681,9 +1711,9 @@ public class BookingPanel extends javax.swing.JPanel {
     private javax.swing.JPanel optionsPanel;
     private javax.swing.JSpinner quantitySpinner;
     private javax.swing.JLabel rateLabel;
-    private javax.swing.JButton refreshButton;
     private javax.swing.JMenuItem removeMenuItem;
     private javax.swing.JRadioButton saleRadioButton;
+    private javax.swing.JButton searchButton;
     private javax.swing.JPanel startDatePanel;
     private org.jdesktop.swingx.JXDatePicker startDatePicker;
     private javax.swing.JPopupMenu tableContextMenu;

@@ -35,7 +35,7 @@ public class Helper {
     }
     
     public static boolean isValidText(String name) {
-        String regex = "^((?![\\^!@#$*~ <>?-]).)+((?![\\^!@#$*~ <>?]).)$";
+        String regex = "^[a-zA-Z].*[\\s\\.]+[a-zA-Z0-9]*$";
         return Helper.regexTester(name, regex);
     }
     

@@ -255,7 +255,7 @@ public class Launcher extends javax.swing.JFrame {
     }//GEN-LAST:event_billingButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        
+        this.dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void selectCardButton() {
