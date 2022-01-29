@@ -27,52 +27,174 @@ public class Test extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        namePanel = new javax.swing.JPanel();
-        nameField = new javax.swing.JTextField();
-        addressPanel = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        addressField = new javax.swing.JTextArea();
-        mobile1Panel = new javax.swing.JPanel();
-        mobile1Field = new javax.swing.JTextField();
-        mobile2Panel = new javax.swing.JPanel();
-        mobile2Field = new javax.swing.JTextField();
-        emailPanel = new javax.swing.JPanel();
-        emailField = new javax.swing.JTextField();
-        eventDetailsPanel = new javax.swing.JPanel();
-        eventDetailsField = new javax.swing.JTextField();
-        nameLabel = new javax.swing.JLabel();
-        addressLabel = new javax.swing.JLabel();
-        emailLabel = new javax.swing.JLabel();
-        eventDetailsLabel = new javax.swing.JLabel();
-        mobile1Label = new javax.swing.JLabel();
-        mobile2Label = new javax.swing.JLabel();
+        formPanel = new javax.swing.JPanel();
         typePanel = new javax.swing.JPanel();
-        memberRadioButton = new javax.swing.JRadioButton();
-        nonMemberRadioButton = new javax.swing.JRadioButton();
-        saleRadioButton = new javax.swing.JRadioButton();
-        typeLabel = new javax.swing.JLabel();
-        show = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        billNumberPanel = new javax.swing.JPanel();
-        billNumberField = new javax.swing.JTextField();
-        billDatePanel = new javax.swing.JPanel();
-        billDatePicker = new org.jdesktop.swingx.JXDatePicker();
+        jLabel2 = new javax.swing.JLabel();
+        hallRadioButton = new javax.swing.JRadioButton();
+        roomRadioButton = new javax.swing.JRadioButton();
+        spaceRadioButton = new javax.swing.JRadioButton();
+        equipmentRadioButton = new javax.swing.JRadioButton();
+        namePanel = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        nameField = new javax.swing.JTextField();
+        bookingSlotPanel = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        fullDayRadioButton = new javax.swing.JRadioButton();
+        halfDayRadioButton = new javax.swing.JRadioButton();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 41), new java.awt.Dimension(0, 41), new java.awt.Dimension(32767, 41));
+        acPanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
+        acYesRadioButton = new javax.swing.JRadioButton();
+        acNoRadioButton = new javax.swing.JRadioButton();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 41), new java.awt.Dimension(0, 41), new java.awt.Dimension(32767, 41));
+        amountPanel = new javax.swing.JPanel();
+        amountLabel = new javax.swing.JLabel();
+        inUsePanel = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        availablePanel = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        amountSpinner = new javax.swing.JSpinner();
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 41), new java.awt.Dimension(0, 41), new java.awt.Dimension(32767, 41));
+        costPanel = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        costSpinner = new javax.swing.JSpinner();
+        chargePanel = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        chargeSpinner = new javax.swing.JSpinner();
+        ratePanel = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        memberRateSpinner = new javax.swing.JSpinner();
+        jLabel7 = new javax.swing.JLabel();
+        nonMemberRateSpinner = new javax.swing.JSpinner();
         jLabel8 = new javax.swing.JLabel();
+        saleRateSpinner = new javax.swing.JSpinner();
+        depositPanel = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        memberDepositSpinner = new javax.swing.JSpinner();
+        jLabel13 = new javax.swing.JLabel();
+        nonMemberDepositSpinner = new javax.swing.JSpinner();
+        jLabel14 = new javax.swing.JLabel();
+        saleDepositSpinner = new javax.swing.JSpinner();
+        statusPanel = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        activeRadioButton = new javax.swing.JRadioButton();
+        inActiveRadioButton = new javax.swing.JRadioButton();
+        commentsPanel = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        commentsField = new javax.swing.JTextArea();
+        buttonsPanel = new javax.swing.JPanel();
+        filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        saveButton = new javax.swing.JButton();
+        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        clearButton = new javax.swing.JButton();
+        filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        deleteButton = new javax.swing.JButton();
+        filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(900, 600));
 
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(900, 600));
+        formPanel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        formPanel.setOpaque(false);
+        formPanel.setPreferredSize(new java.awt.Dimension(900, 501));
+        java.awt.GridBagLayout formPanelLayout = new java.awt.GridBagLayout();
+        formPanelLayout.columnWidths = new int[] {0, 20, 0, 20, 0, 20, 0, 20, 0};
+        formPanelLayout.rowHeights = new int[] {0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0};
+        formPanelLayout.columnWeights = new double[] {1.0};
+        formPanelLayout.rowWeights = new double[] {1.0};
+        formPanel.setLayout(formPanelLayout);
 
-        jPanel2.setOpaque(false);
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        typePanel.setOpaque(false);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("Type");
+
+        hallRadioButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        hallRadioButton.setSelected(true);
+        hallRadioButton.setText("Hall");
+        hallRadioButton.setActionCommand("1");
+        hallRadioButton.setName("hallRadioButton"); // NOI18N
+        hallRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hallRadioButtonActionPerformed(evt);
+            }
+        });
+
+        roomRadioButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        roomRadioButton.setText("Room");
+        roomRadioButton.setActionCommand("2");
+        roomRadioButton.setName("roomRadioButton"); // NOI18N
+        roomRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                roomRadioButtonActionPerformed(evt);
+            }
+        });
+
+        spaceRadioButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        spaceRadioButton.setText("Space");
+        spaceRadioButton.setActionCommand("3");
+        spaceRadioButton.setName("equipmentRadioButton"); // NOI18N
+        spaceRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                spaceRadioButtonActionPerformed(evt);
+            }
+        });
+
+        equipmentRadioButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        equipmentRadioButton.setText("Equipment");
+        equipmentRadioButton.setActionCommand("4");
+        equipmentRadioButton.setName("equipmentRadioButton"); // NOI18N
+        equipmentRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                equipmentRadioButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout typePanelLayout = new javax.swing.GroupLayout(typePanel);
+        typePanel.setLayout(typePanelLayout);
+        typePanelLayout.setHorizontalGroup(
+            typePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(typePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(hallRadioButton)
+                .addGap(18, 18, 18)
+                .addComponent(roomRadioButton)
+                .addGap(18, 18, 18)
+                .addComponent(spaceRadioButton)
+                .addGap(18, 18, 18)
+                .addComponent(equipmentRadioButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        typePanelLayout.setVerticalGroup(
+            typePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(typePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(typePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(hallRadioButton)
+                    .addComponent(roomRadioButton)
+                    .addComponent(equipmentRadioButton)
+                    .addComponent(spaceRadioButton))
+                .addGap(4, 4, 4))
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        formPanel.add(typePanel, gridBagConstraints);
 
         namePanel.setOpaque(false);
+        namePanel.setPreferredSize(new java.awt.Dimension(712, 43));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel6.setText("Name");
 
         nameField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nameField.addActionListener(new java.awt.event.ActionListener() {
@@ -85,481 +207,720 @@ public class Test extends javax.swing.JFrame {
         namePanel.setLayout(namePanelLayout);
         namePanelLayout.setHorizontalGroup(
             namePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(namePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, namePanelLayout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+            .addGroup(namePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         namePanelLayout.setVerticalGroup(
             namePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(namePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, namePanelLayout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        jPanel2.add(namePanel, gridBagConstraints);
-
-        addressPanel.setOpaque(false);
-
-        addressField.setColumns(20);
-        addressField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        addressField.setRows(5);
-        jScrollPane2.setViewportView(addressField);
-
-        javax.swing.GroupLayout addressPanelLayout = new javax.swing.GroupLayout(addressPanel);
-        addressPanel.setLayout(addressPanelLayout);
-        addressPanelLayout.setHorizontalGroup(
-            addressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addressPanelLayout.createSequentialGroup()
+            .addGroup(namePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(namePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
-        addressPanelLayout.setVerticalGroup(
-            addressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addressPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        jPanel2.add(addressPanel, gridBagConstraints);
-
-        mobile1Panel.setOpaque(false);
-
-        mobile1Field.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        mobile1Field.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        mobile1Field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mobile1FieldActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout mobile1PanelLayout = new javax.swing.GroupLayout(mobile1Panel);
-        mobile1Panel.setLayout(mobile1PanelLayout);
-        mobile1PanelLayout.setHorizontalGroup(
-            mobile1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mobile1PanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mobile1Field, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        mobile1PanelLayout.setVerticalGroup(
-            mobile1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mobile1PanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mobile1Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        jPanel2.add(mobile1Panel, gridBagConstraints);
-
-        mobile2Panel.setOpaque(false);
-
-        mobile2Field.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        mobile2Field.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        mobile2Field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mobile2FieldActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout mobile2PanelLayout = new javax.swing.GroupLayout(mobile2Panel);
-        mobile2Panel.setLayout(mobile2PanelLayout);
-        mobile2PanelLayout.setHorizontalGroup(
-            mobile2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mobile2PanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mobile2Field, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        mobile2PanelLayout.setVerticalGroup(
-            mobile2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mobile2PanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mobile2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        jPanel2.add(mobile2Panel, gridBagConstraints);
-
-        emailPanel.setOpaque(false);
-
-        emailField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        emailField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailFieldActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout emailPanelLayout = new javax.swing.GroupLayout(emailPanel);
-        emailPanel.setLayout(emailPanelLayout);
-        emailPanelLayout.setHorizontalGroup(
-            emailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(emailPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        emailPanelLayout.setVerticalGroup(
-            emailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(emailPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        jPanel2.add(emailPanel, gridBagConstraints);
-
-        eventDetailsPanel.setOpaque(false);
-
-        eventDetailsField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        eventDetailsField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eventDetailsFieldActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout eventDetailsPanelLayout = new javax.swing.GroupLayout(eventDetailsPanel);
-        eventDetailsPanel.setLayout(eventDetailsPanelLayout);
-        eventDetailsPanelLayout.setHorizontalGroup(
-            eventDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(eventDetailsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(eventDetailsField, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        eventDetailsPanelLayout.setVerticalGroup(
-            eventDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(eventDetailsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(eventDetailsField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        jPanel2.add(eventDetailsPanel, gridBagConstraints);
-
-        nameLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        nameLabel.setText("Name");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel2.add(nameLabel, gridBagConstraints);
-
-        addressLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        addressLabel.setText("Address");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel2.add(addressLabel, gridBagConstraints);
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        formPanel.add(namePanel, gridBagConstraints);
 
-        emailLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        emailLabel.setText("Email");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel2.add(emailLabel, gridBagConstraints);
+        bookingSlotPanel.setOpaque(false);
+        bookingSlotPanel.setPreferredSize(new java.awt.Dimension(334, 43));
 
-        eventDetailsLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        eventDetailsLabel.setText("Event Details");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel2.add(eventDetailsLabel, gridBagConstraints);
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setText("Booking Slot");
 
-        mobile1Label.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        mobile1Label.setText("Mobile 1");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel2.add(mobile1Label, gridBagConstraints);
+        fullDayRadioButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        fullDayRadioButton.setSelected(true);
+        fullDayRadioButton.setText("Full Day");
+        fullDayRadioButton.setActionCommand("true");
+        fullDayRadioButton.setName("fullDayRadioButton"); // NOI18N
+        fullDayRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fullDayRadioButtonActionPerformed(evt);
+            }
+        });
 
-        mobile2Label.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        mobile2Label.setText("Mobile 2");
+        halfDayRadioButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        halfDayRadioButton.setText("Half Day");
+        halfDayRadioButton.setActionCommand("false");
+        halfDayRadioButton.setName("halfDayRadioButton"); // NOI18N
+        halfDayRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                halfDayRadioButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout bookingSlotPanelLayout = new javax.swing.GroupLayout(bookingSlotPanel);
+        bookingSlotPanel.setLayout(bookingSlotPanelLayout);
+        bookingSlotPanelLayout.setHorizontalGroup(
+            bookingSlotPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bookingSlotPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(fullDayRadioButton)
+                .addGap(18, 18, 18)
+                .addComponent(halfDayRadioButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        bookingSlotPanelLayout.setVerticalGroup(
+            bookingSlotPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bookingSlotPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(bookingSlotPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(fullDayRadioButton)
+                    .addComponent(halfDayRadioButton))
+                .addContainerGap())
+            .addGroup(bookingSlotPanelLayout.createSequentialGroup()
+                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 40);
-        jPanel2.add(mobile2Label, gridBagConstraints);
+        gridBagConstraints.gridy = 4;
+        formPanel.add(bookingSlotPanel, gridBagConstraints);
 
-        typePanel.setOpaque(false);
-
-        memberRadioButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        memberRadioButton.setSelected(true);
-        memberRadioButton.setText("Member");
-        memberRadioButton.setActionCommand("1");
-        memberRadioButton.setName("memberRadioButton"); // NOI18N
-        memberRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                memberRadioButtonActionPerformed(evt);
-            }
-        });
-
-        nonMemberRadioButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        nonMemberRadioButton.setText("Non-Member");
-        nonMemberRadioButton.setActionCommand("0");
-        nonMemberRadioButton.setName("nonMemberRadioButton"); // NOI18N
-        nonMemberRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nonMemberRadioButtonActionPerformed(evt);
-            }
-        });
-
-        saleRadioButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        saleRadioButton.setText("Sale/Exhibition");
-        saleRadioButton.setActionCommand("-1");
-        saleRadioButton.setName("equipmentRadioButton"); // NOI18N
-        saleRadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saleRadioButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout typePanelLayout = new javax.swing.GroupLayout(typePanel);
-        typePanel.setLayout(typePanelLayout);
-        typePanelLayout.setHorizontalGroup(
-            typePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(typePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(memberRadioButton)
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(nonMemberRadioButton)
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(saleRadioButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        typePanelLayout.setVerticalGroup(
-            typePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(typePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(typePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(memberRadioButton)
-                    .addComponent(nonMemberRadioButton)
-                    .addComponent(saleRadioButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
-        jPanel2.add(typePanel, gridBagConstraints);
-
-        typeLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        typeLabel.setText("Type");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel2.add(typeLabel, gridBagConstraints);
-
-        jPanel1.add(jPanel2);
-
-        show.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        show.setText("show");
-        show.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showActionPerformed(evt);
-            }
-        });
-        jPanel1.add(show);
-
-        jPanel3.setOpaque(false);
-        jPanel3.setLayout(new java.awt.GridBagLayout());
-
-        billNumberPanel.setOpaque(false);
-
-        billNumberField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        billNumberField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        billNumberField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                billNumberFieldActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout billNumberPanelLayout = new javax.swing.GroupLayout(billNumberPanel);
-        billNumberPanel.setLayout(billNumberPanelLayout);
-        billNumberPanelLayout.setHorizontalGroup(
-            billNumberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(billNumberPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(billNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        billNumberPanelLayout.setVerticalGroup(
-            billNumberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(billNumberPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(billNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(3, 6, 0, 6);
-        jPanel3.add(billNumberPanel, gridBagConstraints);
-
-        billDatePanel.setOpaque(false);
-
-        billDatePicker.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        javax.swing.GroupLayout billDatePanelLayout = new javax.swing.GroupLayout(billDatePanel);
-        billDatePanel.setLayout(billDatePanelLayout);
-        billDatePanelLayout.setHorizontalGroup(
-            billDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, billDatePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(billDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        billDatePanelLayout.setVerticalGroup(
-            billDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, billDatePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(billDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 0);
-        jPanel3.add(billDatePanel, gridBagConstraints);
+        acPanel.setOpaque(false);
+        acPanel.setPreferredSize(new java.awt.Dimension(334, 41));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel9.setText("Bill Number");
+        jLabel9.setText("AC");
+
+        acYesRadioButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        acYesRadioButton.setSelected(true);
+        acYesRadioButton.setText("Yes");
+        acYesRadioButton.setActionCommand("true");
+        acYesRadioButton.setName("fullDayRadioButton"); // NOI18N
+        acYesRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acYesRadioButtonActionPerformed(evt);
+            }
+        });
+
+        acNoRadioButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        acNoRadioButton.setText("No");
+        acNoRadioButton.setActionCommand("false");
+        acNoRadioButton.setName("halfDayRadioButton"); // NOI18N
+        acNoRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acNoRadioButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout acPanelLayout = new javax.swing.GroupLayout(acPanel);
+        acPanel.setLayout(acPanelLayout);
+        acPanelLayout.setHorizontalGroup(
+            acPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(acPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
+                .addComponent(acYesRadioButton)
+                .addGap(18, 18, 18)
+                .addComponent(acNoRadioButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        acPanelLayout.setVerticalGroup(
+            acPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, acPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(acPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(acYesRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(acNoRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+            .addGroup(acPanelLayout.createSequentialGroup()
+                .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        formPanel.add(acPanel, gridBagConstraints);
+
+        amountPanel.setOpaque(false);
+
+        amountLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        amountLabel.setText("Amount");
+
+        inUsePanel.setOpaque(false);
+
+        jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel20.setText("0");
+
+        jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel21.setText("In Use:");
+
+        javax.swing.GroupLayout inUsePanelLayout = new javax.swing.GroupLayout(inUsePanel);
+        inUsePanel.setLayout(inUsePanelLayout);
+        inUsePanelLayout.setHorizontalGroup(
+            inUsePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inUsePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel21)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel20)
+                .addContainerGap())
+        );
+        inUsePanelLayout.setVerticalGroup(
+            inUsePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(inUsePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(inUsePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(jLabel20))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        availablePanel.setOpaque(false);
+        availablePanel.setPreferredSize(new java.awt.Dimension(115, 31));
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel17.setText("0");
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel18.setText("Available:");
+
+        javax.swing.GroupLayout availablePanelLayout = new javax.swing.GroupLayout(availablePanel);
+        availablePanel.setLayout(availablePanelLayout);
+        availablePanelLayout.setHorizontalGroup(
+            availablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, availablePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel18)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel17)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        availablePanelLayout.setVerticalGroup(
+            availablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(availablePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(availablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel17))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        amountSpinner.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        amountSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 0, null, 1));
+        amountSpinner.setEditor(new javax.swing.JSpinner.NumberEditor(amountSpinner, ""));
+        amountSpinner.setPreferredSize(new java.awt.Dimension(100, 31));
+
+        javax.swing.GroupLayout amountPanelLayout = new javax.swing.GroupLayout(amountPanel);
+        amountPanel.setLayout(amountPanelLayout);
+        amountPanelLayout.setHorizontalGroup(
+            amountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(amountPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(amountLabel)
+                .addGap(18, 18, 18)
+                .addComponent(amountSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(inUsePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(availablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(filler3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        amountPanelLayout.setVerticalGroup(
+            amountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(amountPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(amountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(availablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(amountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(amountLabel)
+                        .addComponent(amountSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inUsePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(amountPanelLayout.createSequentialGroup()
+                .addComponent(filler3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        jPanel3.add(jLabel9, gridBagConstraints);
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        formPanel.add(amountPanel, gridBagConstraints);
+
+        costPanel.setOpaque(false);
+        costPanel.setPreferredSize(new java.awt.Dimension(241, 41));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel10.setText("Cost Per Unit");
+
+        costSpinner.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        costSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        costSpinner.setPreferredSize(new java.awt.Dimension(100, 31));
+
+        javax.swing.GroupLayout costPanelLayout = new javax.swing.GroupLayout(costPanel);
+        costPanel.setLayout(costPanelLayout);
+        costPanelLayout.setHorizontalGroup(
+            costPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(costPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addGap(18, 18, 18)
+                .addComponent(costSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        costPanelLayout.setVerticalGroup(
+            costPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(costPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(costPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(costSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        formPanel.add(costPanel, gridBagConstraints);
+        amountPanel.setVisible(false);
+
+        chargePanel.setOpaque(false);
+        chargePanel.setPreferredSize(new java.awt.Dimension(264, 41));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel16.setText("Charge Per Unit");
+
+        chargeSpinner.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        chargeSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        chargeSpinner.setPreferredSize(new java.awt.Dimension(100, 31));
+
+        javax.swing.GroupLayout chargePanelLayout = new javax.swing.GroupLayout(chargePanel);
+        chargePanel.setLayout(chargePanelLayout);
+        chargePanelLayout.setHorizontalGroup(
+            chargePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(chargePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel16)
+                .addGap(18, 18, 18)
+                .addComponent(chargeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        chargePanelLayout.setVerticalGroup(
+            chargePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(chargePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(chargePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(chargeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        formPanel.add(chargePanel, gridBagConstraints);
+        amountPanel.setVisible(false);
+
+        ratePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Rate", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
+        ratePanel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        ratePanel.setOpaque(false);
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setText("Member");
+
+        memberRateSpinner.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        memberRateSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        memberRateSpinner.setPreferredSize(new java.awt.Dimension(125, 31));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setText("Non-Member");
+
+        nonMemberRateSpinner.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        nonMemberRateSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        nonMemberRateSpinner.setPreferredSize(new java.awt.Dimension(125, 31));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel8.setText("Bill Date");
+        jLabel8.setText("Sale");
+
+        saleRateSpinner.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        saleRateSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        saleRateSpinner.setPreferredSize(new java.awt.Dimension(125, 31));
+
+        javax.swing.GroupLayout ratePanelLayout = new javax.swing.GroupLayout(ratePanel);
+        ratePanel.setLayout(ratePanelLayout);
+        ratePanelLayout.setHorizontalGroup(
+            ratePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ratePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(memberRateSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addGap(18, 18, 18)
+                .addComponent(nonMemberRateSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addGap(18, 18, 18)
+                .addComponent(saleRateSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        ratePanelLayout.setVerticalGroup(
+            ratePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ratePanelLayout.createSequentialGroup()
+                .addGroup(ratePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ratePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8)
+                        .addComponent(saleRateSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ratePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(memberRateSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)
+                        .addComponent(nonMemberRateSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        jPanel3.add(jLabel8, gridBagConstraints);
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        formPanel.add(ratePanel, gridBagConstraints);
 
-        jPanel1.add(jPanel3);
+        depositPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Deposit", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
+        depositPanel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        depositPanel.setOpaque(false);
 
-        jScrollPane1.setViewportView(jPanel1);
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel12.setText("Member");
+
+        memberDepositSpinner.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        memberDepositSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        memberDepositSpinner.setPreferredSize(new java.awt.Dimension(125, 31));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel13.setText("Non-Member");
+
+        nonMemberDepositSpinner.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        nonMemberDepositSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        nonMemberDepositSpinner.setPreferredSize(new java.awt.Dimension(125, 31));
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel14.setText("Sale");
+
+        saleDepositSpinner.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        saleDepositSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        saleDepositSpinner.setPreferredSize(new java.awt.Dimension(125, 31));
+
+        javax.swing.GroupLayout depositPanelLayout = new javax.swing.GroupLayout(depositPanel);
+        depositPanel.setLayout(depositPanelLayout);
+        depositPanelLayout.setHorizontalGroup(
+            depositPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(depositPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel12)
+                .addGap(18, 18, 18)
+                .addComponent(memberDepositSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel13)
+                .addGap(18, 18, 18)
+                .addComponent(nonMemberDepositSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel14)
+                .addGap(18, 18, 18)
+                .addComponent(saleDepositSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        depositPanelLayout.setVerticalGroup(
+            depositPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(depositPanelLayout.createSequentialGroup()
+                .addGroup(depositPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(memberDepositSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13)
+                    .addComponent(nonMemberDepositSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14)
+                    .addComponent(saleDepositSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        formPanel.add(depositPanel, gridBagConstraints);
+
+        statusPanel.setOpaque(false);
+
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel19.setText("Status");
+
+        activeRadioButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        activeRadioButton.setSelected(true);
+        activeRadioButton.setText("Active");
+        activeRadioButton.setActionCommand("1");
+        activeRadioButton.setName("fullDayRadioButton"); // NOI18N
+        activeRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                activeRadioButtonActionPerformed(evt);
+            }
+        });
+
+        inActiveRadioButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        inActiveRadioButton.setText("Inactive");
+        inActiveRadioButton.setActionCommand("0");
+        inActiveRadioButton.setName("halfDayRadioButton"); // NOI18N
+        inActiveRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inActiveRadioButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout statusPanelLayout = new javax.swing.GroupLayout(statusPanel);
+        statusPanel.setLayout(statusPanelLayout);
+        statusPanelLayout.setHorizontalGroup(
+            statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(statusPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel19)
+                .addGap(18, 18, 18)
+                .addComponent(activeRadioButton)
+                .addGap(18, 18, 18)
+                .addComponent(inActiveRadioButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        statusPanelLayout.setVerticalGroup(
+            statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(statusPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(activeRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inActiveRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        formPanel.add(statusPanel, gridBagConstraints);
+
+        commentsPanel.setOpaque(false);
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel15.setText("Comments");
+
+        commentsField.setColumns(20);
+        commentsField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        commentsField.setRows(5);
+        jScrollPane1.setViewportView(commentsField);
+
+        javax.swing.GroupLayout commentsPanelLayout = new javax.swing.GroupLayout(commentsPanel);
+        commentsPanel.setLayout(commentsPanelLayout);
+        commentsPanelLayout.setHorizontalGroup(
+            commentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(commentsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(commentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        commentsPanelLayout.setVerticalGroup(
+            commentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(commentsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        formPanel.add(commentsPanel, gridBagConstraints);
+
+        buttonsPanel.setOpaque(false);
+        buttonsPanel.setLayout(new javax.swing.BoxLayout(buttonsPanel, javax.swing.BoxLayout.LINE_AXIS));
+        buttonsPanel.add(filler5);
+
+        saveButton.setBackground(new java.awt.Color(0, 204, 0));
+        saveButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        saveButton.setForeground(new java.awt.Color(255, 255, 255));
+        saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
+        buttonsPanel.add(saveButton);
+        buttonsPanel.add(filler6);
+
+        clearButton.setBackground(new java.awt.Color(0, 0, 153));
+        clearButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        clearButton.setForeground(new java.awt.Color(255, 255, 255));
+        clearButton.setText("Clear");
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
+        buttonsPanel.add(clearButton);
+        buttonsPanel.add(filler7);
+
+        deleteButton.setBackground(new java.awt.Color(255, 0, 0));
+        deleteButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        deleteButton.setForeground(new java.awt.Color(255, 255, 255));
+        deleteButton.setText("Delete");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
+        buttonsPanel.add(deleteButton);
+        buttonsPanel.add(filler8);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        formPanel.add(buttonsPanel, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 1660, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(formPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 581, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(formPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void hallRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hallRadioButtonActionPerformed
+        amountLabel.setText("Capacity");
+        amountPanel.setVisible(true);
+        bookingSlotPanel.setVisible(true);
+        acPanel.setVisible(true);
+        inUsePanel.setVisible(false);
+        availablePanel.setVisible(false);
+        costPanel.setVisible(false);
+        chargePanel.setVisible(false);
+    }//GEN-LAST:event_hallRadioButtonActionPerformed
+
+    private void roomRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roomRadioButtonActionPerformed
+        amountLabel.setText("Capacity");
+        amountPanel.setVisible(true);
+        bookingSlotPanel.setVisible(true);
+        acPanel.setVisible(true);
+        inUsePanel.setVisible(false);
+        availablePanel.setVisible(false);
+        costPanel.setVisible(false);
+        chargePanel.setVisible(false);
+    }//GEN-LAST:event_roomRadioButtonActionPerformed
+
+    private void spaceRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spaceRadioButtonActionPerformed
+        amountLabel.setText("Capacity");
+        amountPanel.setVisible(true);
+        inUsePanel.setVisible(false);
+        availablePanel.setVisible(false);
+        bookingSlotPanel.setVisible(true);
+        acPanel.setVisible(false);
+        inUsePanel.setVisible(false);
+        availablePanel.setVisible(false);
+        costPanel.setVisible(false);
+        chargePanel.setVisible(false);
+    }//GEN-LAST:event_spaceRadioButtonActionPerformed
+
+    private void equipmentRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equipmentRadioButtonActionPerformed
+        amountLabel.setText("Quantity");
+        amountPanel.setVisible(true);
+        bookingSlotPanel.setVisible(false);
+        acPanel.setVisible(false);
+        inUsePanel.setVisible(true);
+        availablePanel.setVisible(true);
+        costPanel.setVisible(true);
+        chargePanel.setVisible(true);
+    }//GEN-LAST:event_equipmentRadioButtonActionPerformed
+
     private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameFieldActionPerformed
 
-    private void mobile1FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mobile1FieldActionPerformed
+    private void fullDayRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fullDayRadioButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_mobile1FieldActionPerformed
+    }//GEN-LAST:event_fullDayRadioButtonActionPerformed
 
-    private void mobile2FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mobile2FieldActionPerformed
+    private void halfDayRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_halfDayRadioButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_mobile2FieldActionPerformed
+    }//GEN-LAST:event_halfDayRadioButtonActionPerformed
 
-    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
+    private void acYesRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acYesRadioButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_emailFieldActionPerformed
+    }//GEN-LAST:event_acYesRadioButtonActionPerformed
 
-    private void eventDetailsFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventDetailsFieldActionPerformed
+    private void acNoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acNoRadioButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_eventDetailsFieldActionPerformed
+    }//GEN-LAST:event_acNoRadioButtonActionPerformed
 
-    private void memberRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_memberRadioButtonActionPerformed
+    private void activeRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activeRadioButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_memberRadioButtonActionPerformed
+    }//GEN-LAST:event_activeRadioButtonActionPerformed
 
-    private void nonMemberRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nonMemberRadioButtonActionPerformed
+    private void inActiveRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inActiveRadioButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nonMemberRadioButtonActionPerformed
+    }//GEN-LAST:event_inActiveRadioButtonActionPerformed
 
-    private void saleRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleRadioButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_saleRadioButtonActionPerformed
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        
+    }//GEN-LAST:event_saveButtonActionPerformed
 
-    private void showActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showActionPerformed
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        
+    }//GEN-LAST:event_clearButtonActionPerformed
 
-    }//GEN-LAST:event_showActionPerformed
-
-    private void billNumberFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_billNumberFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_billNumberFieldActionPerformed
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -597,40 +958,71 @@ public class Test extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea addressField;
-    private javax.swing.JLabel addressLabel;
-    private javax.swing.JPanel addressPanel;
-    private javax.swing.JPanel billDatePanel;
-    private org.jdesktop.swingx.JXDatePicker billDatePicker;
-    private javax.swing.JTextField billNumberField;
-    private javax.swing.JPanel billNumberPanel;
-    private javax.swing.JTextField emailField;
-    private javax.swing.JLabel emailLabel;
-    private javax.swing.JPanel emailPanel;
-    private javax.swing.JTextField eventDetailsField;
-    private javax.swing.JLabel eventDetailsLabel;
-    private javax.swing.JPanel eventDetailsPanel;
+    private javax.swing.JRadioButton acNoRadioButton;
+    private javax.swing.JPanel acPanel;
+    private javax.swing.JRadioButton acYesRadioButton;
+    private javax.swing.JRadioButton activeRadioButton;
+    private javax.swing.JLabel amountLabel;
+    private javax.swing.JPanel amountPanel;
+    private javax.swing.JSpinner amountSpinner;
+    private javax.swing.JPanel availablePanel;
+    private javax.swing.JPanel bookingSlotPanel;
+    private javax.swing.JPanel buttonsPanel;
+    private javax.swing.JPanel chargePanel;
+    private javax.swing.JSpinner chargeSpinner;
+    private javax.swing.JButton clearButton;
+    private javax.swing.JTextArea commentsField;
+    private javax.swing.JPanel commentsPanel;
+    private javax.swing.JPanel costPanel;
+    private javax.swing.JSpinner costSpinner;
+    private javax.swing.JButton deleteButton;
+    private javax.swing.JPanel depositPanel;
+    private javax.swing.JRadioButton equipmentRadioButton;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.Box.Filler filler3;
+    private javax.swing.Box.Filler filler5;
+    private javax.swing.Box.Filler filler6;
+    private javax.swing.Box.Filler filler7;
+    private javax.swing.Box.Filler filler8;
+    private javax.swing.JPanel formPanel;
+    private javax.swing.JRadioButton fullDayRadioButton;
+    private javax.swing.JRadioButton halfDayRadioButton;
+    private javax.swing.JRadioButton hallRadioButton;
+    private javax.swing.JRadioButton inActiveRadioButton;
+    private javax.swing.JPanel inUsePanel;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JRadioButton memberRadioButton;
-    private javax.swing.JTextField mobile1Field;
-    private javax.swing.JLabel mobile1Label;
-    private javax.swing.JPanel mobile1Panel;
-    private javax.swing.JTextField mobile2Field;
-    private javax.swing.JLabel mobile2Label;
-    private javax.swing.JPanel mobile2Panel;
+    private javax.swing.JSpinner memberDepositSpinner;
+    private javax.swing.JSpinner memberRateSpinner;
     private javax.swing.JTextField nameField;
-    private javax.swing.JLabel nameLabel;
     private javax.swing.JPanel namePanel;
-    private javax.swing.JRadioButton nonMemberRadioButton;
-    private javax.swing.JRadioButton saleRadioButton;
-    private javax.swing.JButton show;
-    private javax.swing.JLabel typeLabel;
+    private javax.swing.JSpinner nonMemberDepositSpinner;
+    private javax.swing.JSpinner nonMemberRateSpinner;
+    private javax.swing.JPanel ratePanel;
+    private javax.swing.JRadioButton roomRadioButton;
+    private javax.swing.JSpinner saleDepositSpinner;
+    private javax.swing.JSpinner saleRateSpinner;
+    private javax.swing.JButton saveButton;
+    private javax.swing.JRadioButton spaceRadioButton;
+    private javax.swing.JPanel statusPanel;
     private javax.swing.JPanel typePanel;
     // End of variables declaration//GEN-END:variables
 }
