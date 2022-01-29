@@ -9,9 +9,11 @@ import java.util.List;
 
 public class EntityDao implements Dao<Entity> {
 
-    private static final String path = "database/", filename = "booking.db";
-    private static final String url = "jdbc:sqlite:" + path + filename;
-
+    public static String createQuery = "create table if not exists entity (id integer primary key not null, name text not " +
+            "null, type integer, amount integer, ac boolean default null, booking_slot integer default null, member_rate integer, " +
+            "nonmember_rate, sale_rate integer, member_deposit integer, nonmember_deposit, sale_deposit integer, " +
+            "comments text, unit_cost integer default null, unit_charge integer default null, status integer default '1');";
+    
     private static Connection connection = DatabaseConnection.getConnection();
 
     @Override
@@ -21,7 +23,7 @@ public class EntityDao implements Dao<Entity> {
                 ") VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, entity.getName());
+        preparedStatement.setString(1, String.valueOf(entity.getName()));
         preparedStatement.setString(2, String.valueOf(entity.getType()));
         preparedStatement.setString(3, String.valueOf(entity.getAmount()));
         preparedStatement.setString(4, String.valueOf(entity.getAc()));
@@ -32,7 +34,7 @@ public class EntityDao implements Dao<Entity> {
         preparedStatement.setString(9, String.valueOf(entity.getMemberDeposit()));
         preparedStatement.setString(10, String.valueOf(entity.getNonMemberDeposit()));
         preparedStatement.setString(11, String.valueOf(entity.getSaleDeposit()));
-        preparedStatement.setString(12, entity.getComments());
+        preparedStatement.setString(12, String.valueOf(entity.getComments()));
         preparedStatement.setString(13, String.valueOf(entity.getUnitCost()));
         preparedStatement.setString(14, String.valueOf(entity.getUnitCharge()));
         preparedStatement.setString(15, String.valueOf(entity.getStatus()));
@@ -42,7 +44,7 @@ public class EntityDao implements Dao<Entity> {
                 if (generatedKeys.next()) {
                     entity.setId((int) generatedKeys.getLong(1));
                 } else {
-                    throw new SQLException("Creating user failed, no ID obtained.");
+                    throw new SQLException("Creation failed, no ID obtained.");
                 }
             }
         }
@@ -130,8 +132,6 @@ public class EntityDao implements Dao<Entity> {
             entity.setComments(resultSet.getString("comments"));
 
             entityList.add(entity);
-
-//            System.out.println(entity);
         }
         return entityList;
     }

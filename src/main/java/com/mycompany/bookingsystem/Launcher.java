@@ -10,6 +10,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.util.Enumeration;
 import javax.swing.AbstractButton;
 import javax.swing.JFrame;
@@ -76,7 +77,6 @@ public class Launcher extends javax.swing.JFrame {
         setBackground(new java.awt.Color(0, 0, 0));
         setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
         setName("MainFrame"); // NOI18N
-        setResizable(false);
 
         containerPanel.setBackground(new java.awt.Color(217, 217, 217));
         containerPanel.setLayout(new java.awt.BorderLayout());
@@ -190,9 +190,10 @@ public class Launcher extends javax.swing.JFrame {
         mainContainerPanel.setBackground(new java.awt.Color(217, 217, 217));
         mainContainerPanel.setOpaque(false);
         mainContainerPanel.setPreferredSize(new java.awt.Dimension(1395, 700));
+        mainContainerPanel.setLayout(new javax.swing.BoxLayout(mainContainerPanel, javax.swing.BoxLayout.X_AXIS));
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
-        mainPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(40, 75, 99), 2, true));
+        mainPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(40, 75, 99), 0));
         mainPanel.setOpaque(false);
         mainPanel.setLayout(new java.awt.CardLayout());
 
@@ -208,7 +209,7 @@ public class Launcher extends javax.swing.JFrame {
             .addGroup(reportsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel11)
-                .addContainerGap(2305, Short.MAX_VALUE))
+                .addContainerGap(2321, Short.MAX_VALUE))
         );
         reportsPanelLayout.setVerticalGroup(
             reportsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,22 +221,7 @@ public class Launcher extends javax.swing.JFrame {
 
         mainPanel.add(reportsPanel, "reports");
 
-        javax.swing.GroupLayout mainContainerPanelLayout = new javax.swing.GroupLayout(mainContainerPanel);
-        mainContainerPanel.setLayout(mainContainerPanelLayout);
-        mainContainerPanelLayout.setHorizontalGroup(
-            mainContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainContainerPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        mainContainerPanelLayout.setVerticalGroup(
-            mainContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainContainerPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        mainContainerPanel.add(mainPanel);
 
         containerPanel.add(mainContainerPanel, java.awt.BorderLayout.CENTER);
 
@@ -246,6 +232,7 @@ public class Launcher extends javax.swing.JFrame {
 
     private void bookingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingButtonActionPerformed
         selectCardButton();
+//        bookingPanel.reset();
         CardLayout cl = (CardLayout)(mainPanel.getLayout());
         cl.show(mainPanel, "booking");
     }//GEN-LAST:event_bookingButtonActionPerformed
@@ -258,6 +245,7 @@ public class Launcher extends javax.swing.JFrame {
 
     private void inventoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryButtonActionPerformed
         selectCardButton();
+        inventoryPanel.reset();
         CardLayout cl = (CardLayout)(mainPanel.getLayout());
         cl.show(mainPanel, "inventory");
     }//GEN-LAST:event_inventoryButtonActionPerformed
@@ -324,14 +312,14 @@ public class Launcher extends javax.swing.JFrame {
             public void run() {
                 
                 Launcher frame = new Launcher();
-                int WIDTH = 900, HEIGHT = 600;
-                frame.setSize(WIDTH, HEIGHT);
-                frame.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+                frame.pack();
+                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                frame.setSize(screenSize);
+                frame.setPreferredSize(screenSize);
                 frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 frame.setLocationRelativeTo(null);
-
-                frame.pack();
                 frame.setVisible(true);
+                frame.setResizable(false);
             }
         });
     }

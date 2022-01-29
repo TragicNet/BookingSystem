@@ -1,12 +1,15 @@
 package com.mycompany.bookingsystem.Database;
 
+import com.mycompany.bookingsystem.Models.Booking.BookingDao;
+import com.mycompany.bookingsystem.Models.BookingItem.BookingItemDao;
+import com.mycompany.bookingsystem.Models.Entity.EntityDao;
 import java.io.File;
 import java.sql.*;
 
 public abstract class DatabaseConnection {
     
-    private static final String path = "database/", filename = "booking.db";
-    private static final String url = "jdbc:sqlite:" + path + filename;
+    private static final String PATH = "database/", FILENAME = "booking.db";
+    private static final String URL = "jdbc:sqlite:" + PATH + FILENAME;
 
     private static Connection connection = null;
     
@@ -18,12 +21,10 @@ public abstract class DatabaseConnection {
         checkPath();
         try {
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection(url);
+            connection = DriverManager.getConnection(URL);
             createTables();
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
         }
     }
 
@@ -32,7 +33,7 @@ public abstract class DatabaseConnection {
     }
 
     private static void checkPath() {
-        File dir = new File(path);
+        File dir = new File(PATH);
         if(!dir.exists()) {
             dir.mkdirs();
         }
@@ -40,12 +41,9 @@ public abstract class DatabaseConnection {
 
     public static void createTables() throws SQLException {
         Statement statement = connection.createStatement();
-
-        String entityTableQuery = "create table if not exists entity (id integer primary key not null, name text not " +
-                "null, type integer, amount integer, ac boolean default null, booking_slot integer default null, member_rate integer, " +
-                "nonmember_rate, sale_rate integer, member_deposit integer, nonmember_deposit, sale_deposit integer, " +
-                "comments text, unit_cost integer default null, unit_charge integer default null, status integer default '1');";
-        statement.execute(entityTableQuery);
+        statement.execute(EntityDao.createQuery);
+        statement.execute(BookingDao.createQuery);
+        statement.execute(BookingItemDao.createQuery);
     }
     
 }

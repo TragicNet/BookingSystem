@@ -47,6 +47,11 @@ public class InventoryPanel extends javax.swing.JPanel {
      */
     public InventoryPanel(JFrame frame) {
         this.frame = frame;
+        init();
+        
+    }
+
+    private void init() {
         initComponents();
         
         typeButtons = new JRadioButton[4];
@@ -69,8 +74,6 @@ public class InventoryPanel extends javax.swing.JPanel {
         
         typeButtons[0].doClick();
         
-//        customizeComponents();
-        
         entityDao = new EntityDao();
 
         try {
@@ -78,11 +81,16 @@ public class InventoryPanel extends javax.swing.JPanel {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        
+
         entityListModel = new DefaultListModel<>();
         entityJList.setModel(entityListModel);
         refreshEntityList();
+    }
+    
+    public void reset() {
+        this.removeAll();
         
+        init();
     }
 
     /**
@@ -260,7 +268,7 @@ public class InventoryPanel extends javax.swing.JPanel {
             .addGroup(entityListPanelLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -981,7 +989,7 @@ public class InventoryPanel extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(entityListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(formPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 972, Short.MAX_VALUE)
+                .addComponent(formPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -989,9 +997,10 @@ public class InventoryPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(formPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(entityListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
+                    .addComponent(entityListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(formPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
     }// </editor-fold>//GEN-END:initComponents
 

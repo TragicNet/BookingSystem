@@ -23,17 +23,30 @@ public class Helper {
         }
     }
     
-    public static boolean isValidText(String name) {
-        String regex = "^((?![\\^!@#$*~ <>?-]).)((?![\\^!@#$*~<>?]).)+((?![\\^!@#$*~ <>?]).)$";
-  
+    public static boolean regexTester(String string, String regex) {
         Pattern p = Pattern.compile(regex);
   
-        if (name == null)
+        if (string == null)
             return false;
         
-        Matcher m = p.matcher(name);
+        Matcher m = p.matcher(string);
   
         return m.matches();
+    }
+    
+    public static boolean isValidText(String name) {
+        String regex = "^((?![\\^!@#$*~ <>?-]).)+((?![\\^!@#$*~ <>?]).)$";
+        return Helper.regexTester(name, regex);
+    }
+    
+    public static boolean isValidEmail(String email) {
+        String regex = "^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\. [a-zA-Z0-9-]+)*$";
+        return Helper.regexTester(email, regex);
+    }
+    
+    public static boolean isValidPhone(String email) {
+        String regex = "^\\d{10}$";
+        return Helper.regexTester(email, regex);
     }
     
 }
