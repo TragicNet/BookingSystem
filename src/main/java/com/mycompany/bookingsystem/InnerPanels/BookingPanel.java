@@ -1257,6 +1257,7 @@ public class BookingPanel extends javax.swing.JPanel {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         if(!Helper.isValidText(entityNameField.getText())) {
+            System.out.println("Not Valid");
             return;
         }
         DefaultTableModel model = (DefaultTableModel) entityTable.getModel();
@@ -1282,6 +1283,8 @@ public class BookingPanel extends javax.swing.JPanel {
             for(int i = 0; i < entityTable.getColumnCount(); i++)
                 model.setValueAt(data[i], r, i);
         }
+        
+        System.out.println(name + ": " + entityTable.getRowCount());
         
         entitySelectionDialog.dispose();
         
