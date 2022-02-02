@@ -17,7 +17,9 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -36,6 +38,7 @@ public class BookingPanel extends javax.swing.JPanel {
     private DefaultListModel<String> entityListModel;
     private final JFrame frame;
     private int lastSelectedType = -1;
+    private Map<String,Integer> columnIndices;
     
     /**
      * Creates new form InventoryPanel
@@ -58,6 +61,12 @@ public class BookingPanel extends javax.swing.JPanel {
 
         entityListModel = new DefaultListModel<>();
         entityJList.setModel(entityListModel);
+        
+        columnIndices =new HashMap<>();
+        for(int i = 0; i < entityTable.getColumnCount(); i++) {
+            columnIndices.put(entityTable.getColumnName(i),i);
+        }
+        
     }
     
     public void reset() {
@@ -151,8 +160,15 @@ public class BookingPanel extends javax.swing.JPanel {
         typeComboBox = new javax.swing.JComboBox<>();
         durationComboBox = new javax.swing.JComboBox<>();
         searchButton = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        startDatePanel = new javax.swing.JPanel();
+        startDatePicker = new org.jdesktop.swingx.JXDatePicker();
+        jLabel10 = new javax.swing.JLabel();
+        endDatePanel = new javax.swing.JPanel();
+        endDatePicker = new org.jdesktop.swingx.JXDatePicker();
         jScrollPane4 = new javax.swing.JScrollPane();
         entityJList = new javax.swing.JList<>();
+        jPanel7 = new javax.swing.JPanel();
         tableContextMenu = new javax.swing.JPopupMenu();
         newMenuItem = new javax.swing.JMenuItem();
         editMenuItem = new javax.swing.JMenuItem();
@@ -194,7 +210,7 @@ public class BookingPanel extends javax.swing.JPanel {
         billNumberPanel = new javax.swing.JPanel();
         billNumberField = new javax.swing.JTextField();
         billDatePanel = new javax.swing.JPanel();
-        billDatePicker = new org.jdesktop.swingx.JXDatePicker();
+        billDateValue = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         entityTableScrollPane = new javax.swing.JScrollPane();
@@ -204,12 +220,6 @@ public class BookingPanel extends javax.swing.JPanel {
             }
         };
         jPanel4 = new javax.swing.JPanel();
-        startDatePanel = new javax.swing.JPanel();
-        startDatePicker = new org.jdesktop.swingx.JXDatePicker();
-        jLabel10 = new javax.swing.JLabel();
-        endDatePanel = new javax.swing.JPanel();
-        endDatePicker = new org.jdesktop.swingx.JXDatePicker();
-        jLabel11 = new javax.swing.JLabel();
         bookButton = new javax.swing.JButton();
         clearButton = new javax.swing.JButton();
 
@@ -365,8 +375,8 @@ public class BookingPanel extends javax.swing.JPanel {
         jPanel6.add(capacityLabel, gridBagConstraints);
 
         java.awt.GridBagLayout jPanel5Layout = new java.awt.GridBagLayout();
-        jPanel5Layout.columnWidths = new int[] {0, 20, 0, 20, 0, 20, 0};
-        jPanel5Layout.rowHeights = new int[] {0, 10, 0, 10, 0, 10, 0};
+        jPanel5Layout.columnWidths = new int[] {0, 20, 0, 20, 0, 20, 0, 20, 0, 20, 0, 20, 0};
+        jPanel5Layout.rowHeights = new int[] {0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0};
         jPanel5Layout.columnWeights = new double[] {1.0};
         jPanel5Layout.rowWeights = new double[] {1.0};
         jPanel5.setLayout(jPanel5Layout);
@@ -465,10 +475,85 @@ public class BookingPanel extends javax.swing.JPanel {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         jPanel5.add(searchButton, gridBagConstraints);
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel11.setText("End Date");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel5.add(jLabel11, gridBagConstraints);
+
+        startDatePanel.setOpaque(false);
+
+        startDatePicker.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        startDatePicker.setPreferredSize(new java.awt.Dimension(200, 33));
+
+        javax.swing.GroupLayout startDatePanelLayout = new javax.swing.GroupLayout(startDatePanel);
+        startDatePanel.setLayout(startDatePanelLayout);
+        startDatePanelLayout.setHorizontalGroup(
+            startDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(startDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 206, Short.MAX_VALUE)
+        );
+        startDatePanelLayout.setVerticalGroup(
+            startDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, startDatePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(startDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        jPanel5.add(startDatePanel, gridBagConstraints);
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel10.setText("Start Date");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel5.add(jLabel10, gridBagConstraints);
+
+        endDatePanel.setOpaque(false);
+
+        endDatePicker.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        endDatePicker.setPreferredSize(new java.awt.Dimension(200, 33));
+        endDatePicker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                endDatePickerActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout endDatePanelLayout = new javax.swing.GroupLayout(endDatePanel);
+        endDatePanel.setLayout(endDatePanelLayout);
+        endDatePanelLayout.setHorizontalGroup(
+            endDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(endDatePanelLayout.createSequentialGroup()
+                .addComponent(endDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 206, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        endDatePanelLayout.setVerticalGroup(
+            endDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(endDatePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(endDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        jPanel5.add(endDatePanel, gridBagConstraints);
 
         jScrollPane4.setBorder(null);
         jScrollPane4.setViewportBorder(new javax.swing.border.LineBorder(new java.awt.Color(40, 75, 99), 2, true));
@@ -513,6 +598,11 @@ public class BookingPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        java.awt.GridBagLayout jPanel7Layout = new java.awt.GridBagLayout();
+        jPanel7Layout.columnWidths = new int[] {0, 20, 0};
+        jPanel7Layout.rowHeights = new int[] {0, 10, 0};
+        jPanel7.setLayout(jPanel7Layout);
+
         javax.swing.GroupLayout entitySelectionDialogLayout = new javax.swing.GroupLayout(entitySelectionDialog.getContentPane());
         entitySelectionDialog.getContentPane().setLayout(entitySelectionDialogLayout);
         entitySelectionDialogLayout.setHorizontalGroup(
@@ -523,6 +613,7 @@ public class BookingPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(entitySelectionDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -534,6 +625,8 @@ public class BookingPanel extends javax.swing.JPanel {
                     .addComponent(optionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(entitySelectionDialogLayout.createSequentialGroup()
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(addButton)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -957,7 +1050,10 @@ public class BookingPanel extends javax.swing.JPanel {
         jPanel1.add(typeLabel, gridBagConstraints);
 
         jPanel2.setOpaque(false);
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        java.awt.GridBagLayout jPanel2Layout = new java.awt.GridBagLayout();
+        jPanel2Layout.columnWidths = new int[] {0, 20, 0};
+        jPanel2Layout.rowHeights = new int[] {0, 10, 0, 10, 0};
+        jPanel2.setLayout(jPanel2Layout);
 
         billNumberPanel.setOpaque(false);
 
@@ -988,39 +1084,37 @@ public class BookingPanel extends javax.swing.JPanel {
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(3, 6, 0, 6);
         jPanel2.add(billNumberPanel, gridBagConstraints);
 
         billDatePanel.setOpaque(false);
 
-        billDatePicker.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        billDatePicker.setPreferredSize(new java.awt.Dimension(200, 33));
+        billDateValue.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        billDateValue.setText("Bill Date Value");
 
         javax.swing.GroupLayout billDatePanelLayout = new javax.swing.GroupLayout(billDatePanel);
         billDatePanel.setLayout(billDatePanelLayout);
         billDatePanelLayout.setHorizontalGroup(
             billDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, billDatePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(billDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(billDatePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(billDateValue)
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         billDatePanelLayout.setVerticalGroup(
             billDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, billDatePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(billDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(billDatePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(billDateValue, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 0);
         jPanel2.add(billDatePanel, gridBagConstraints);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -1035,7 +1129,7 @@ public class BookingPanel extends javax.swing.JPanel {
         jLabel8.setText("Bill Date");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         jPanel2.add(jLabel8, gridBagConstraints);
 
@@ -1053,14 +1147,14 @@ public class BookingPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "S.No", "Name", "Qty", "Rate", "Deposit", "Total Rate", "Total Deposit", "type", "duration", "ac", "id"
+                "S.No", "Name", "Qty", "Rate", "Deposit", "Total Rate", "Total Deposit", "type", "duration", "ac", "id", "Start Date", "End Date"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1105,87 +1199,16 @@ public class BookingPanel extends javax.swing.JPanel {
             entityTable.getColumnModel().getColumn(9).setMaxWidth(0);
             entityTable.getColumnModel().getColumn(10).setMinWidth(0);
             entityTable.getColumnModel().getColumn(10).setMaxWidth(0);
+            entityTable.getColumnModel().getColumn(11).setMinWidth(0);
+            entityTable.getColumnModel().getColumn(11).setMaxWidth(0);
+            entityTable.getColumnModel().getColumn(12).setMinWidth(0);
+            entityTable.getColumnModel().getColumn(12).setMaxWidth(0);
         }
 
         java.awt.GridBagLayout jPanel4Layout = new java.awt.GridBagLayout();
         jPanel4Layout.columnWidths = new int[] {0, 20, 0, 20, 0};
         jPanel4Layout.rowHeights = new int[] {0, 10, 0, 10, 0};
         jPanel4.setLayout(jPanel4Layout);
-
-        startDatePanel.setOpaque(false);
-
-        startDatePicker.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        startDatePicker.setPreferredSize(new java.awt.Dimension(200, 33));
-
-        javax.swing.GroupLayout startDatePanelLayout = new javax.swing.GroupLayout(startDatePanel);
-        startDatePanel.setLayout(startDatePanelLayout);
-        startDatePanelLayout.setHorizontalGroup(
-            startDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(startDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 206, Short.MAX_VALUE)
-        );
-        startDatePanelLayout.setVerticalGroup(
-            startDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, startDatePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(startDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel4.add(startDatePanel, gridBagConstraints);
-
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel10.setText("Start Date");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel4.add(jLabel10, gridBagConstraints);
-
-        endDatePanel.setOpaque(false);
-
-        endDatePicker.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        endDatePicker.setPreferredSize(new java.awt.Dimension(200, 33));
-        endDatePicker.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                endDatePickerActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout endDatePanelLayout = new javax.swing.GroupLayout(endDatePanel);
-        endDatePanel.setLayout(endDatePanelLayout);
-        endDatePanelLayout.setHorizontalGroup(
-            endDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(endDatePanelLayout.createSequentialGroup()
-                .addComponent(endDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 206, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        endDatePanelLayout.setVerticalGroup(
-            endDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(endDatePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(endDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel4.add(endDatePanel, gridBagConstraints);
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel11.setText("End Date");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel4.add(jLabel11, gridBagConstraints);
 
         bookButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         bookButton.setText("Book");
@@ -1225,7 +1248,7 @@ public class BookingPanel extends javax.swing.JPanel {
                         .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1268,12 +1291,14 @@ public class BookingPanel extends javax.swing.JPanel {
         int deposit = Integer.parseInt(depositLabel.getText());
         int type = typeComboBox.getSelectedIndex();
         int qty = (type == 3 ? (int) quantitySpinner.getValue() : 1);
+        Date startDate = startDatePicker.getDate();
+        Date endDate = endDatePicker.getDate();
         int total_rate = rate * qty;
         int total_deposit = deposit * qty;
         int duration = durationComboBox.getSelectedIndex();
         boolean ac = acYesRadioButton.isSelected();
         
-        Object[] data = new Object[]{srNo, name, qty, rate, deposit, total_rate, total_deposit, type, duration, ac, id};
+        Object[] data = new Object[]{srNo, name, qty, rate, deposit, total_rate, total_deposit, type, duration, ac, id, startDate, endDate};
         
         if(addButton.getActionCommand().equals("ADD")) {
             model.addRow(data);
@@ -1426,16 +1451,16 @@ public class BookingPanel extends javax.swing.JPanel {
         addButton.setText("Update");
         addButton.setActionCommand("UPDATE");
         
-        typeComboBox.setSelectedIndex((int) model.getValueAt(r, 7));
-        durationComboBox.setSelectedIndex((int) model.getValueAt(r, 8));
-        if((boolean) model.getValueAt(r, 9)) {
+        typeComboBox.setSelectedIndex((int) model.getValueAt(r, columnIndices.get("type")));
+        durationComboBox.setSelectedIndex((int) model.getValueAt(r, columnIndices.get("duration")));
+        if((boolean) model.getValueAt(r, columnIndices.get("ac"))) {
             acYesRadioButton.setSelected(true);
         } else {
             acNoRadioButton.setSelected(true);
         }
         
         searchButton.doClick();
-        int id = (int) model.getValueAt(r, 10);
+        int id = (int) model.getValueAt(r, columnIndices.get("id"));
         for(int i = 0; i < entityList.size(); i++) {
             if(entityList.get(i).getId() == id) {
                 entityJList.setSelectedIndex(i);
@@ -1444,9 +1469,12 @@ public class BookingPanel extends javax.swing.JPanel {
             }
         }
         
-        if(model.getValueAt(r, 7).equals(3)) {
-            quantitySpinner.setValue(model.getValueAt(r, 2));
+        if(model.getValueAt(r, columnIndices.get("type")).equals(3)) {
+            quantitySpinner.setValue(model.getValueAt(r, columnIndices.get("Qty")));
         }
+        
+        startDatePicker.setDate((Date) model.getValueAt(r, columnIndices.get("Start Date")));
+        endDatePicker.setDate((Date) model.getValueAt(r, columnIndices.get("End Date")));
         
         entitySelectionDialog.pack();
         entitySelectionDialog.setLocationRelativeTo(null);
@@ -1515,6 +1543,19 @@ public class BookingPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_durationComboBoxActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        
+        if(startDatePicker.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Invalid Start Date!");
+            startDatePicker.requestFocus();
+            return;
+        }
+        
+        if(endDatePicker.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Invalid End Date!");
+            endDatePicker.requestFocus();
+            return;
+        }
+        
         refreshEntityList();
         entityJList.setSelectedIndex(0);
     }//GEN-LAST:event_searchButtonActionPerformed
@@ -1556,24 +1597,6 @@ public class BookingPanel extends javax.swing.JPanel {
             return;
         }
         
-        if(billDatePicker.getDate() == null) {
-            JOptionPane.showMessageDialog(null, "Invalid Bill Date!");
-            billDatePicker.requestFocus();
-            return;
-        }
-        
-        if(startDatePicker.getDate() == null) {
-            JOptionPane.showMessageDialog(null, "Invalid Start Date!");
-            startDatePicker.requestFocus();
-            return;
-        }
-        
-        if(endDatePicker.getDate() == null) {
-            JOptionPane.showMessageDialog(null, "Invalid End Date!");
-            endDatePicker.requestFocus();
-            return;
-        }
-        
         if(entityTable.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "No Entity Selected! Select at least 1");
             return;
@@ -1582,7 +1605,7 @@ public class BookingPanel extends javax.swing.JPanel {
         Booking booking = new Booking();
         
         booking.setBillNumber(billNumberField.getText());
-        booking.setBillDate((Date) billDatePicker.getDate());
+        booking.setBillDate(new Date());
         booking.setType(Integer.parseInt(customerTypeButtonGroup.getSelection().getActionCommand()));
         booking.setName(nameField.getText());
         booking.setAddress(addressField.getText());
@@ -1590,8 +1613,6 @@ public class BookingPanel extends javax.swing.JPanel {
         booking.setMobile2(mobile2Field.getText());
         booking.setAddress(addressField.getText());
         booking.setEventDetails(eventDetailsField.getText());
-        booking.setStartDate((Date) startDatePicker.getDate());
-        booking.setEndDate((Date) endDatePicker.getDate());
         booking.setTotalRate(0);
         booking.setTotalDeposit(0);
         booking.setStatus(0);
@@ -1604,16 +1625,19 @@ public class BookingPanel extends javax.swing.JPanel {
             bookingDao.add(booking);
             BookingItemDao bookingItemDao = new BookingItemDao();
             BookingItem bookingItem;
+            
             for(int r = 0; r < entityTable.getRowCount(); r++) {
                 bookingItem = new BookingItem();
                 bookingItem.setBookingId(booking.getId());
-                bookingItem.setEntityId((int) entityTable.getValueAt(r, 10));
-                bookingItem.setQuantity((int) entityTable.getValueAt(r, 2));
+                bookingItem.setEntityId((int) entityTable.getValueAt(r, columnIndices.get("id")));
+                bookingItem.setQuantity((int) entityTable.getValueAt(r, columnIndices.get("Qty")));
+                bookingItem.setStartDate((Date) entityTable.getValueAt(r, columnIndices.get("Start Date")));
+                bookingItem.setEndDate((Date) entityTable.getValueAt(r, columnIndices.get("End Date")));
                 
                 bookingItemDao.add(bookingItem);
                 
-                totalRate += (int) entityTable.getValueAt(r, 5);
-                totalDeposit += (int) entityTable.getValueAt(r, 6);
+                totalRate += (int) entityTable.getValueAt(r, columnIndices.get("Total Rate"));
+                totalDeposit += (int) entityTable.getValueAt(r, columnIndices.get("Total Deposit"));
             }
             
             booking.setTotalRate(totalRate);
@@ -1648,7 +1672,7 @@ public class BookingPanel extends javax.swing.JPanel {
     private javax.swing.JLabel amountLabel;
     private javax.swing.JLabel availableLabel;
     private javax.swing.JPanel billDatePanel;
-    private org.jdesktop.swingx.JXDatePicker billDatePicker;
+    private javax.swing.JLabel billDateValue;
     private javax.swing.JTextField billNumberField;
     private javax.swing.JPanel billNumberPanel;
     private javax.swing.JButton bookButton;
@@ -1695,6 +1719,7 @@ public class BookingPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1739,7 +1764,7 @@ public class BookingPanel extends javax.swing.JPanel {
         int id, rate = 0, deposit = 0, total_rate = 0, total_deposit = 0;
         Entity entity;
         for(int r = 0; r < entityTable.getRowCount(); r++) {
-            id = (int) model.getValueAt(r, 10);
+            id = (int) model.getValueAt(r, columnIndices.get("id"));
             try {
                 entity = entityDao.get(id);
                 if(customerType == 1) {

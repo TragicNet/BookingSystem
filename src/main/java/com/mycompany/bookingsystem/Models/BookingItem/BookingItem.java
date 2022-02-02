@@ -4,6 +4,8 @@
  */
 package com.mycompany.bookingsystem.Models.BookingItem;
 
+import java.util.Date;
+
 /**
  *
  * @author TragicNet
@@ -13,14 +15,18 @@ public class BookingItem {
     int bookingId;
     int entityId;
     int quantity;
+    Date startDate;
+    Date endDate;
 
     public BookingItem() {
     }
 
-    public BookingItem(int bookingId, int entityId, int quantity) {
+    public BookingItem(int bookingId, int entityId, int quantity, Date startDate, Date endDate) {
         this.bookingId = bookingId;
         this.entityId = entityId;
         this.quantity = quantity;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public int getBookingId() {
@@ -47,9 +53,22 @@ public class BookingItem {
         this.quantity = quantity;
     }
 
-    @Override
-    public String toString() {
-        return "BookingItem{" + "bookingId=" + bookingId + ", entityId=" + entityId + ", quantity=" + quantity + '}';
+    public Date getStartDate() {
+        return startDate;
     }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    
     
 }

@@ -21,7 +21,7 @@ public class BookingDao implements Dao<Booking> {
     
     public static String createQuery = "create table if not exists booking (id integer primary key not null, " + 
             "bill_number text not null, bill_date Date, type integer, name text not null, address text, " +
-            "mobile1 text, mobile2 text, email text, eventDetails text, start_date Date, end_date Date, " + 
+            "mobile1 text, mobile2 text, email text, eventDetails text, " + 
             "total_rate integer, total_deposit integer, status integer default '0')";
 
     private static Connection connection = DatabaseConnection.getConnection();
@@ -29,8 +29,8 @@ public class BookingDao implements Dao<Booking> {
     @Override
     public int add(Booking booking) throws SQLException {
         String query = "insert into booking (bill_number, bill_date, type, name, address, mobile1, mobile2, email, " + 
-                "eventDetails, start_date, end_date, total_rate, total_deposit, status) " +
-                "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "eventDetails, total_rate, total_deposit, status) " +
+                "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, String.valueOf(booking.getBillNumber()));
@@ -42,11 +42,9 @@ public class BookingDao implements Dao<Booking> {
         preparedStatement.setString(7, String.valueOf(booking.getMobile2()));
         preparedStatement.setString(8, String.valueOf(booking.getEmail()));
         preparedStatement.setString(9, String.valueOf(booking.getEventDetails()));
-        preparedStatement.setString(10, String.valueOf(booking.getStartDate()));
-        preparedStatement.setString(11, String.valueOf(booking.getEndDate()));
-        preparedStatement.setString(12, String.valueOf(booking.getTotalRate()));
-        preparedStatement.setString(13, String.valueOf(booking.getTotalDeposit()));
-        preparedStatement.setString(14, String.valueOf(booking.getStatus()));
+        preparedStatement.setString(10, String.valueOf(booking.getTotalRate()));
+        preparedStatement.setString(11, String.valueOf(booking.getTotalDeposit()));
+        preparedStatement.setString(12, String.valueOf(booking.getStatus()));
         int i = preparedStatement.executeUpdate();
         if(i != 0) {
             try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
@@ -88,10 +86,8 @@ public class BookingDao implements Dao<Booking> {
             booking.setName(resultSet.getString("name"));
             booking.setAddress(resultSet.getString("address"));
             booking.setMobile1(resultSet.getString("mobile1"));
-            booking.setMobile1(resultSet.getString("mobile2"));
+            booking.setMobile2(resultSet.getString("mobile2"));
             booking.setEventDetails(resultSet.getString("eventDetails"));
-            booking.setStartDate(resultSet.getDate("start_date"));
-            booking.setEndDate(resultSet.getDate("end_date"));
             booking.setTotalRate(resultSet.getInt("total_rate"));
             booking.setTotalDeposit(resultSet.getInt("total_deposit"));
             booking.setStatus(resultSet.getInt("status"));
@@ -130,8 +126,6 @@ public class BookingDao implements Dao<Booking> {
             booking.setMobile1(resultSet.getString("mobile1"));
             booking.setMobile1(resultSet.getString("mobile2"));
             booking.setEventDetails(resultSet.getString("eventDetails"));
-            booking.setStartDate(resultSet.getDate("start_date"));
-            booking.setEndDate(resultSet.getDate("end_date"));
             booking.setTotalRate(resultSet.getInt("total_rate"));
             booking.setTotalDeposit(resultSet.getInt("total_deposit"));
             booking.setStatus(resultSet.getInt("status"));
@@ -144,7 +138,7 @@ public class BookingDao implements Dao<Booking> {
     @Override
     public void update(Booking booking) throws SQLException {
         String query = "update booking set bill_number = ?, bill_date = ?, type = ?, name = ?, address = ?, " +
-                "mobile1 = ?, mobile2 = ?, email = ?, eventDetails = ?, start_date = ?, end_date = ?, " +
+                "mobile1 = ?, mobile2 = ?, email = ?, eventDetails = ?, " +
                 "total_rate = ?, total_deposit = ?, status = ? where id = ?";
         
         PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -157,12 +151,10 @@ public class BookingDao implements Dao<Booking> {
         preparedStatement.setString(7, String.valueOf(booking.getMobile2()));
         preparedStatement.setString(8, String.valueOf(booking.getEmail()));
         preparedStatement.setString(9, String.valueOf(booking.getEventDetails()));
-        preparedStatement.setString(10, String.valueOf(booking.getStartDate()));
-        preparedStatement.setString(11, String.valueOf(booking.getEndDate()));
-        preparedStatement.setString(12, String.valueOf(booking.getTotalRate()));
-        preparedStatement.setString(13, String.valueOf(booking.getTotalDeposit()));
-        preparedStatement.setString(14, String.valueOf(booking.getStatus()));
-        preparedStatement.setString(15, String.valueOf(booking.getId()));
+        preparedStatement.setString(10, String.valueOf(booking.getTotalRate()));
+        preparedStatement.setString(11, String.valueOf(booking.getTotalDeposit()));
+        preparedStatement.setString(12, String.valueOf(booking.getStatus()));
+        preparedStatement.setString(13, String.valueOf(booking.getId()));
         preparedStatement.executeUpdate();
     }
     

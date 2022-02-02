@@ -21,18 +21,20 @@ public class BookingItemDao implements Dao<BookingItem> {
 
     public static String createQuery = "create table if not exists booking_item " +
             "(booking_id integer references booking(id), entity_id integer references entity(id), " +
-            "quantity integer default '1')";
+            "quantity integer default '1', start_date Date, end_date Date)";
 
     private static Connection connection = DatabaseConnection.getConnection();
     
     @Override
     public int add(BookingItem bookingItem) throws SQLException {
-        String query = "insert into booking_item (booking_id, entity_id, quantity) values (?, ?, ?)";
+        String query = "insert into booking_item (booking_id, entity_id, quantity, start_date, end_date) values (?, ?, ?, ?, ?)";
 
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, String.valueOf(bookingItem.getBookingId()));
         preparedStatement.setString(2, String.valueOf(bookingItem.getEntityId()));
         preparedStatement.setString(3, String.valueOf(bookingItem.getQuantity()));
+        preparedStatement.setString(4, String.valueOf(bookingItem.getStartDate()));
+        preparedStatement.setString(5, String.valueOf(bookingItem.getEndDate()));
         preparedStatement.executeUpdate();
         return -1;
     }
@@ -70,6 +72,8 @@ public class BookingItemDao implements Dao<BookingItem> {
             bookingItem.setBookingId(resultSet.getInt("booking_id"));
             bookingItem.setEntityId(resultSet.getInt("entity_id"));
             bookingItem.setQuantity(resultSet.getInt("quantity"));
+            bookingItem.setStartDate(resultSet.getDate("start_date"));
+            bookingItem.setEndDate(resultSet.getDate("end_date"));
 
             bookingItemList.add(bookingItem);
         }

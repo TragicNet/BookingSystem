@@ -21,15 +21,13 @@ public class Booking {
     String mobile2;
     String email;
     String eventDetails;
-    Date startDate;
-    Date endDate;
     int totalRate;
     int totalDeposit;
     int status;
 
     public Booking() {}
 
-    public Booking(int id, String billNumber, Date billDate, int type, String name, String address, String mobile1, String mobile2, String email, String eventDetails, Date startDate, Date endDate, int totalRate, int totalDeposit, int status) {
+    public Booking(int id, String billNumber, Date billDate, int type, String name, String address, String mobile1, String mobile2, String email, String eventDetails, int totalRate, int totalDeposit, int status) {
         this.id = id;
         this.billNumber = billNumber;
         this.billDate = billDate;
@@ -40,14 +38,10 @@ public class Booking {
         this.mobile2 = mobile2;
         this.email = email;
         this.eventDetails = eventDetails;
-        this.startDate = startDate;
-        this.endDate = endDate;
         this.totalRate = totalRate;
         this.totalDeposit = totalDeposit;
         this.status = status;
     }
-
-    
 
     public int getId() {
         return id;
@@ -129,22 +123,6 @@ public class Booking {
         this.eventDetails = eventDetails;
     }
 
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
     public int getTotalRate() {
         return totalRate;
     }
@@ -169,9 +147,5 @@ public class Booking {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "Booking{" + "id=" + id + ", billNumber=" + billNumber + ", billDate=" + billDate + ", type=" + type + ", name=" + name + ", address=" + address + ", mobile1=" + mobile1 + ", mobile2=" + mobile2 + ", email=" + email + ", eventDetails=" + eventDetails + ", startDate=" + startDate + ", endDate=" + endDate + ", totalRate=" + totalRate + ", totalDeposit=" + totalDeposit + ", status=" + status + '}';
-    }
-
+    
 }
