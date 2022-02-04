@@ -72,8 +72,6 @@ public class InventoryPanel extends javax.swing.JPanel {
         statusButtons[1] = activeRadioButton;
         statusButtons[0] = inActiveRadioButton;
         
-        typeButtons[0].doClick();
-        
         entityDao = new EntityDao();
 
         try {
@@ -85,6 +83,9 @@ public class InventoryPanel extends javax.swing.JPanel {
         entityListModel = new DefaultListModel<>();
         entityJList.setModel(entityListModel);
         refreshEntityList();
+        
+        typeButtons[0].setSelected(true);
+        
     }
     
     public void reset() {
@@ -1024,6 +1025,8 @@ public class InventoryPanel extends javax.swing.JPanel {
         availablePanel.setVisible(false);
         costPanel.setVisible(false);
         chargePanel.setVisible(false);
+        newForm();
+        entityComboBox.setSelectedIndex(1);
     }//GEN-LAST:event_hallRadioButtonActionPerformed
 
     private void roomRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roomRadioButtonActionPerformed
@@ -1035,6 +1038,8 @@ public class InventoryPanel extends javax.swing.JPanel {
         availablePanel.setVisible(false);
         costPanel.setVisible(false);
         chargePanel.setVisible(false);
+        newForm();
+        entityComboBox.setSelectedIndex(2);
     }//GEN-LAST:event_roomRadioButtonActionPerformed
 
     private void spaceRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spaceRadioButtonActionPerformed
@@ -1048,6 +1053,8 @@ public class InventoryPanel extends javax.swing.JPanel {
         availablePanel.setVisible(false);
         costPanel.setVisible(false);
         chargePanel.setVisible(false);
+        newForm();
+        entityComboBox.setSelectedIndex(3);
     }//GEN-LAST:event_spaceRadioButtonActionPerformed
 
     private void equipmentRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equipmentRadioButtonActionPerformed
@@ -1059,8 +1066,17 @@ public class InventoryPanel extends javax.swing.JPanel {
         availablePanel.setVisible(true);
         costPanel.setVisible(true);
         chargePanel.setVisible(true);
+        newForm();
+        entityComboBox.setSelectedIndex(4);
     }//GEN-LAST:event_equipmentRadioButtonActionPerformed
 
+    public void newForm() {
+        entityJList.clearSelection();
+        clearButton.setEnabled(true);
+        deleteButton.setEnabled(false);
+        clearButton.doClick();
+    }
+    
     private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameFieldActionPerformed
@@ -1145,7 +1161,6 @@ public class InventoryPanel extends javax.swing.JPanel {
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         nameField.setText("");
-        typeButtons[0].doClick();
         amountSpinner.setValue(1);
         acYesRadioButton.setSelected(true);
         fullDayRadioButton.setSelected(true);
@@ -1167,9 +1182,14 @@ public class InventoryPanel extends javax.swing.JPanel {
             String.valueOf(JOptionPane.WARNING_MESSAGE),JOptionPane.OK_CANCEL_OPTION);
         if(result == JOptionPane.YES_OPTION){
             try {
-                entityDao.delete(selectedEntityId);
-                newButton.doClick();
-                refreshEntityList();
+                for(JRadioButton b : typeButtons) {
+                    if(b.getActionCommand() == null ? typeButtonGroup.getSelection().getActionCommand() == null : b.getActionCommand().equals(typeButtonGroup.getSelection().getActionCommand())) {
+                        entityDao.delete(selectedEntityId);
+                        b.doClick();
+                        JOptionPane.showMessageDialog(null, "Entity Deleted!");
+                        break;
+                    }
+                }
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
@@ -1184,7 +1204,7 @@ public class InventoryPanel extends javax.swing.JPanel {
             selectedEntityId = entity.getId();
             nameField.setText(entity.getName());
 
-            typeButtons[entity.getType() - 1].doClick();
+            typeButtons[entity.getType() - 1].setSelected(true);
             bookingSlotButtons[entity.getBookingSlot() ? 1 : 0].setSelected(true);
             acButtons[entity.getAc() ? 1 : 0].setSelected(true);
             amountSpinner.setValue(entity.getAmount());

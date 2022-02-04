@@ -15,6 +15,8 @@ import com.mycompany.bookingsystem.Models.Entity.Entity;
 import com.mycompany.bookingsystem.Models.Entity.EntityDao;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -34,6 +36,7 @@ import javax.swing.table.DefaultTableModel;
 public class BookingPanel extends javax.swing.JPanel {
     
     private EntityDao entityDao;
+    private BookingDao bookingDao;
     private List<Entity> entityList;
     private DefaultListModel<String> entityListModel;
     private final JFrame frame;
@@ -52,6 +55,7 @@ public class BookingPanel extends javax.swing.JPanel {
         initComponents();
         
         entityDao = new EntityDao();
+        bookingDao = new BookingDao();
 
         try {
             entityList = (ArrayList<Entity>) entityDao.getAll();
@@ -66,6 +70,19 @@ public class BookingPanel extends javax.swing.JPanel {
         for(int i = 0; i < entityTable.getColumnCount(); i++) {
             columnIndices.put(entityTable.getColumnName(i),i);
         }
+        
+        try {
+            List bookingList = bookingDao.select("select * from booking order by id desc limit 1");
+            if(bookingList.size() > 0) {
+                Booking booking = (Booking) (bookingList.get(0));
+                billNumberLabel.setText(String.valueOf(booking.getId()));
+            } else {
+                billNumberLabel.setText("1");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BookingPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        billDateLabel.setText(Helper.dateFormat.format(new Date()));
         
     }
     
@@ -208,9 +225,9 @@ public class BookingPanel extends javax.swing.JPanel {
         typeLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         billNumberPanel = new javax.swing.JPanel();
-        billNumberField = new javax.swing.JTextField();
+        billNumberLabel = new javax.swing.JLabel();
         billDatePanel = new javax.swing.JPanel();
-        billDateValue = new javax.swing.JLabel();
+        billDateLabel = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         entityTableScrollPane = new javax.swing.JScrollPane();
@@ -491,13 +508,19 @@ public class BookingPanel extends javax.swing.JPanel {
         startDatePanel.setOpaque(false);
 
         startDatePicker.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        startDatePicker.setFormats(Helper.dateFormat);
         startDatePicker.setPreferredSize(new java.awt.Dimension(200, 33));
+        startDatePicker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startDatePickerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout startDatePanelLayout = new javax.swing.GroupLayout(startDatePanel);
         startDatePanel.setLayout(startDatePanelLayout);
         startDatePanelLayout.setHorizontalGroup(
             startDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(startDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 206, Short.MAX_VALUE)
+            .addComponent(startDatePicker, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
         );
         startDatePanelLayout.setVerticalGroup(
             startDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -525,6 +548,7 @@ public class BookingPanel extends javax.swing.JPanel {
         endDatePanel.setOpaque(false);
 
         endDatePicker.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        endDatePicker.setFormats(Helper.dateFormat);
         endDatePicker.setPreferredSize(new java.awt.Dimension(200, 33));
         endDatePicker.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -537,7 +561,7 @@ public class BookingPanel extends javax.swing.JPanel {
         endDatePanelLayout.setHorizontalGroup(
             endDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(endDatePanelLayout.createSequentialGroup()
-                .addComponent(endDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 206, Short.MAX_VALUE)
+                .addComponent(endDatePicker, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                 .addContainerGap())
         );
         endDatePanelLayout.setVerticalGroup(
@@ -1057,14 +1081,7 @@ public class BookingPanel extends javax.swing.JPanel {
 
         billNumberPanel.setOpaque(false);
 
-        billNumberField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        billNumberField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        billNumberField.setPreferredSize(new java.awt.Dimension(200, 31));
-        billNumberField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                billNumberFieldActionPerformed(evt);
-            }
-        });
+        billNumberLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout billNumberPanelLayout = new javax.swing.GroupLayout(billNumberPanel);
         billNumberPanel.setLayout(billNumberPanelLayout);
@@ -1072,15 +1089,15 @@ public class BookingPanel extends javax.swing.JPanel {
             billNumberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(billNumberPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(billNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(billNumberLabel)
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         billNumberPanelLayout.setVerticalGroup(
             billNumberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(billNumberPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(billNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(billNumberLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                .addGap(4, 4, 4))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1091,8 +1108,7 @@ public class BookingPanel extends javax.swing.JPanel {
 
         billDatePanel.setOpaque(false);
 
-        billDateValue.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        billDateValue.setText("Bill Date Value");
+        billDateLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout billDatePanelLayout = new javax.swing.GroupLayout(billDatePanel);
         billDatePanel.setLayout(billDatePanelLayout);
@@ -1100,14 +1116,14 @@ public class BookingPanel extends javax.swing.JPanel {
             billDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(billDatePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(billDateValue)
+                .addComponent(billDateLabel)
                 .addContainerGap(81, Short.MAX_VALUE))
         );
         billDatePanelLayout.setVerticalGroup(
             billDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(billDatePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(billDateValue, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                .addComponent(billDateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1147,11 +1163,11 @@ public class BookingPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "S.No", "Name", "Qty", "Rate", "Deposit", "Total Rate", "Total Deposit", "type", "duration", "ac", "id", "Start Date", "End Date"
+                "S.No", "Name", "Start Date", "End Date", "Qty", "Rate", "Deposit", "Total Rate", "Total Deposit", "type", "duration", "ac", "id"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false, false, false, false, false
@@ -1165,7 +1181,6 @@ public class BookingPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        entityTable.setToolTipText("");
         entityTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         entityTable.setDefaultRenderer(Object.class, new TableCellRenderer());
         entityTable.setRowHeight(24);
@@ -1181,20 +1196,22 @@ public class BookingPanel extends javax.swing.JPanel {
         if (entityTable.getColumnModel().getColumnCount() > 0) {
             entityTable.getColumnModel().getColumn(0).setPreferredWidth(50);
             entityTable.getColumnModel().getColumn(0).setMaxWidth(50);
-            entityTable.getColumnModel().getColumn(2).setPreferredWidth(50);
-            entityTable.getColumnModel().getColumn(2).setMaxWidth(50);
+            entityTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+            entityTable.getColumnModel().getColumn(2).setMaxWidth(100);
+            entityTable.getColumnModel().getColumn(2).setCellRenderer(null);
             entityTable.getColumnModel().getColumn(3).setPreferredWidth(100);
             entityTable.getColumnModel().getColumn(3).setMaxWidth(100);
-            entityTable.getColumnModel().getColumn(4).setPreferredWidth(100);
-            entityTable.getColumnModel().getColumn(4).setMaxWidth(100);
+            entityTable.getColumnModel().getColumn(3).setCellRenderer(null);
+            entityTable.getColumnModel().getColumn(4).setPreferredWidth(50);
+            entityTable.getColumnModel().getColumn(4).setMaxWidth(50);
             entityTable.getColumnModel().getColumn(5).setPreferredWidth(100);
             entityTable.getColumnModel().getColumn(5).setMaxWidth(100);
             entityTable.getColumnModel().getColumn(6).setPreferredWidth(100);
             entityTable.getColumnModel().getColumn(6).setMaxWidth(100);
-            entityTable.getColumnModel().getColumn(7).setMinWidth(0);
-            entityTable.getColumnModel().getColumn(7).setMaxWidth(0);
-            entityTable.getColumnModel().getColumn(8).setMinWidth(0);
-            entityTable.getColumnModel().getColumn(8).setMaxWidth(0);
+            entityTable.getColumnModel().getColumn(7).setPreferredWidth(100);
+            entityTable.getColumnModel().getColumn(7).setMaxWidth(100);
+            entityTable.getColumnModel().getColumn(8).setPreferredWidth(100);
+            entityTable.getColumnModel().getColumn(8).setMaxWidth(100);
             entityTable.getColumnModel().getColumn(9).setMinWidth(0);
             entityTable.getColumnModel().getColumn(9).setMaxWidth(0);
             entityTable.getColumnModel().getColumn(10).setMinWidth(0);
@@ -1291,25 +1308,22 @@ public class BookingPanel extends javax.swing.JPanel {
         int deposit = Integer.parseInt(depositLabel.getText());
         int type = typeComboBox.getSelectedIndex();
         int qty = (type == 3 ? (int) quantitySpinner.getValue() : 1);
-        Date startDate = startDatePicker.getDate();
-        Date endDate = endDatePicker.getDate();
+        String startDate = Helper.dateFormat.format(startDatePicker.getDate());
+        String endDate = Helper.dateFormat.format(endDatePicker.getDate());
         int total_rate = rate * qty;
         int total_deposit = deposit * qty;
         int duration = durationComboBox.getSelectedIndex();
         boolean ac = acYesRadioButton.isSelected();
         
-        Object[] data = new Object[]{srNo, name, qty, rate, deposit, total_rate, total_deposit, type, duration, ac, id, startDate, endDate};
+        Object[] data = new Object[]{srNo, name, startDate, endDate, qty, rate, deposit, total_rate, total_deposit, type, duration, ac, id};
         
         if(addButton.getActionCommand().equals("ADD")) {
             model.addRow(data);
-            System.out.println(name + ": " + entityTable.getRowCount());
         } else if(addButton.getActionCommand().equals("UPDATE")) {
             int r = entityTable.getSelectedRow();
             for(int i = 0; i < entityTable.getColumnCount(); i++)
                 model.setValueAt(data[i], r, i);
         }
-        
-        System.out.println(name + ": " + entityTable.getRowCount());
         
         entitySelectionDialog.dispose();
         
@@ -1334,10 +1348,6 @@ public class BookingPanel extends javax.swing.JPanel {
     private void eventDetailsFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventDetailsFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_eventDetailsFieldActionPerformed
-
-    private void billNumberFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_billNumberFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_billNumberFieldActionPerformed
 
     private void saleRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleRadioButtonActionPerformed
         customerTypeButtonListener();
@@ -1473,8 +1483,12 @@ public class BookingPanel extends javax.swing.JPanel {
             quantitySpinner.setValue(model.getValueAt(r, columnIndices.get("Qty")));
         }
         
-        startDatePicker.setDate((Date) model.getValueAt(r, columnIndices.get("Start Date")));
-        endDatePicker.setDate((Date) model.getValueAt(r, columnIndices.get("End Date")));
+        try {
+            startDatePicker.setDate(Helper.dateFormat.parse((String) model.getValueAt(r, columnIndices.get("Start Date"))));
+            endDatePicker.setDate(Helper.dateFormat.parse((String) model.getValueAt(r, columnIndices.get("End Date"))));
+        } catch (ParseException ex) {
+            Logger.getLogger(BookingPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         entitySelectionDialog.pack();
         entitySelectionDialog.setLocationRelativeTo(null);
@@ -1567,12 +1581,6 @@ public class BookingPanel extends javax.swing.JPanel {
             return;
         }
         
-        if(!Helper.isValidText(addressField.getText())) {
-            JOptionPane.showMessageDialog(null, "Invalid Address!");
-            addressField.requestFocus();
-            return;
-        }
-        
         if(!Helper.isValidPhone(mobile1Field.getText())) {
             JOptionPane.showMessageDialog(null, "Invalid Mobile 1!");
             mobile1Field.requestFocus();
@@ -1591,12 +1599,6 @@ public class BookingPanel extends javax.swing.JPanel {
             return;
         }
         
-        if(billNumberField.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Invalid Bill Number!");
-            billNumberField.requestFocus();
-            return;
-        }
-        
         if(entityTable.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "No Entity Selected! Select at least 1");
             return;
@@ -1604,7 +1606,7 @@ public class BookingPanel extends javax.swing.JPanel {
         
         Booking booking = new Booking();
         
-        booking.setBillNumber(billNumberField.getText());
+        booking.setBillNumber(billNumberLabel.getText());
         booking.setBillDate(new Date());
         booking.setType(Integer.parseInt(customerTypeButtonGroup.getSelection().getActionCommand()));
         booking.setName(nameField.getText());
@@ -1616,8 +1618,6 @@ public class BookingPanel extends javax.swing.JPanel {
         booking.setTotalRate(0);
         booking.setTotalDeposit(0);
         booking.setStatus(0);
-        
-        BookingDao bookingDao = new BookingDao();
         
         int totalRate = 0, totalDeposit = 0;
         
@@ -1631,8 +1631,13 @@ public class BookingPanel extends javax.swing.JPanel {
                 bookingItem.setBookingId(booking.getId());
                 bookingItem.setEntityId((int) entityTable.getValueAt(r, columnIndices.get("id")));
                 bookingItem.setQuantity((int) entityTable.getValueAt(r, columnIndices.get("Qty")));
-                bookingItem.setStartDate((Date) entityTable.getValueAt(r, columnIndices.get("Start Date")));
-                bookingItem.setEndDate((Date) entityTable.getValueAt(r, columnIndices.get("End Date")));
+                
+                try {
+                    bookingItem.setStartDate(Helper.dateFormat.parse((String) entityTable.getValueAt(r, columnIndices.get("Start Date"))));
+                    bookingItem.setEndDate(Helper.dateFormat.parse((String) entityTable.getValueAt(r, columnIndices.get("End Date"))));
+                } catch (ParseException ex) {
+                    Logger.getLogger(BookingPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
                 bookingItemDao.add(bookingItem);
                 
@@ -1659,6 +1664,10 @@ public class BookingPanel extends javax.swing.JPanel {
     private void endDatePickerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endDatePickerActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_endDatePickerActionPerformed
+
+    private void startDatePickerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startDatePickerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_startDatePickerActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup acButtonGroup;
@@ -1671,9 +1680,9 @@ public class BookingPanel extends javax.swing.JPanel {
     private javax.swing.JPanel addressPanel;
     private javax.swing.JLabel amountLabel;
     private javax.swing.JLabel availableLabel;
+    private javax.swing.JLabel billDateLabel;
     private javax.swing.JPanel billDatePanel;
-    private javax.swing.JLabel billDateValue;
-    private javax.swing.JTextField billNumberField;
+    private javax.swing.JLabel billNumberLabel;
     private javax.swing.JPanel billNumberPanel;
     private javax.swing.JButton bookButton;
     private javax.swing.JLabel capacityLabel;

@@ -4,6 +4,7 @@
  */
 package com.mycompany.bookingsystem.Helper;
 
+import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JTable;
@@ -14,6 +15,9 @@ import javax.swing.UIManager;
  * @author TragicNet
  */
 public class Helper {
+    
+    public static SimpleDateFormat dateFormat = new SimpleDateFormat( "dd/MM/yy" );
+    
     public static void setUIFont(javax.swing.plaf.FontUIResource f) {
         java.util.Enumeration keys = UIManager.getDefaults().keys();
         while (keys.hasMoreElements()) {

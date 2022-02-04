@@ -245,7 +245,7 @@ public class Launcher extends javax.swing.JFrame {
 
     private void inventoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryButtonActionPerformed
         selectCardButton();
-        inventoryPanel.reset();
+//        inventoryPanel.reset();
         CardLayout cl = (CardLayout)(mainPanel.getLayout());
         cl.show(mainPanel, "inventory");
     }//GEN-LAST:event_inventoryButtonActionPerformed
