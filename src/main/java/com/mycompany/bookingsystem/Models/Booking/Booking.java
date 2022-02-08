@@ -147,5 +147,8 @@ public class Booking {
         this.status = status;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Booking{" + "id=" + id + ", billNumber=" + billNumber + ", billDate=" + billDate + ", type=" + type + ", name=" + name + ", address=" + address + ", mobile1=" + mobile1 + ", mobile2=" + mobile2 + ", email=" + email + ", eventDetails=" + eventDetails + ", totalRate=" + totalRate + ", totalDeposit=" + totalDeposit + ", status=" + status + '}';
+    }
 }

@@ -8,6 +8,7 @@ import com.mycompany.bookingsystem.Models.Entity.Entity;
 import com.mycompany.bookingsystem.Models.Entity.EntityDao;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 
 /**
@@ -16,27 +17,13 @@ import javax.swing.JRadioButton;
  */
 public class ReportsPanel extends javax.swing.JPanel {
 
-    private final String selectQuery[] = {
-            "select * from entity where status <> -1 order by name collate nocase",
-            "select * from entity  where status <> -1 and type = '1' order by name collate nocase",
-            "select * from entity  where status <> -1 and type = '2' order by name collate nocase",
-            "select * from entity  where status <> -1 and type = '3' order by name collate nocase",
-            "select * from entity  where status <> -1 and type = '4' order by name collate nocase"
-    };
-    
-    private EntityDao entityDao;
-    private List<Entity> entityList;
-    private DefaultListModel<String> entityListModel;
-    private int selectedEntityId;
-    private JRadioButton typeButtons[];
-    private JRadioButton bookingSlotButtons[];
-    private JRadioButton acButtons[];
-    private JRadioButton statusButtons[];
+    private final JFrame frame;
     
     /**
      * Creates new form InventoryPanel
      */
-    public ReportsPanel() {
+    public ReportsPanel(JFrame frame) {
+        this.frame = frame;
         initComponents();
 
     }
@@ -50,31 +37,34 @@ public class ReportsPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        typeButtonGroup = new javax.swing.ButtonGroup();
-        acButtonGroup = new javax.swing.ButtonGroup();
-        bookingSlotButtonGroup = new javax.swing.ButtonGroup();
-        statusButtonGroup = new javax.swing.ButtonGroup();
+        jLabel1 = new javax.swing.JLabel();
 
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1683, 700));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setText("Reports");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1683, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(1615, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(669, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup acButtonGroup;
-    private javax.swing.ButtonGroup bookingSlotButtonGroup;
-    private javax.swing.ButtonGroup statusButtonGroup;
-    private javax.swing.ButtonGroup typeButtonGroup;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -13,6 +13,7 @@ import com.mycompany.bookingsystem.Models.BookingItem.BookingItem;
 import com.mycompany.bookingsystem.Models.BookingItem.BookingItemDao;
 import com.mycompany.bookingsystem.Models.Entity.Entity;
 import com.mycompany.bookingsystem.Models.Entity.EntityDao;
+import java.awt.CardLayout;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -38,6 +39,7 @@ public class BookingPanel extends javax.swing.JPanel {
     private EntityDao entityDao;
     private BookingDao bookingDao;
     private List<Entity> entityList;
+    private List<Booking> bookingList;
     private DefaultListModel<String> entityListModel;
     private final JFrame frame;
     private int lastSelectedType = -1;
@@ -71,19 +73,25 @@ public class BookingPanel extends javax.swing.JPanel {
             columnIndices.put(entityTable.getColumnName(i),i);
         }
         
-        try {
-            List bookingList = bookingDao.select("select * from booking order by id desc limit 1");
-            if(bookingList.size() > 0) {
-                Booking booking = (Booking) (bookingList.get(0));
+        resetForm();
+        
+    }
+
+    private void resetForm() {
+        if(bookingList != null) {
+            try {
+                List allBookingList = bookingDao.select("select * from booking order by id desc limit 1");
+                Booking booking = (Booking) (allBookingList.get(0));
                 billNumberLabel.setText(String.valueOf(booking.getId()));
-            } else {
-                billNumberLabel.setText("1");
+            } catch (SQLException ex) {
+                Logger.getLogger(BookingPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(BookingPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            billNumberLabel.setText("1");
         }
         billDateLabel.setText(Helper.dateFormat.format(new Date()));
         
+        memberRadioButton.doClick();
     }
     
     public void reset() {
@@ -92,14 +100,35 @@ public class BookingPanel extends javax.swing.JPanel {
         init();
     }
     
+    private void refreshBookingList() {
+        if(bookingList != null) {
+            bookingList.clear();
+            DefaultTableModel model = (DefaultTableModel) bookingTable.getModel();
+            model.setRowCount(0);
+        }
+        try {
+            bookingList = bookingDao.select("select * from booking where status <> -1 order by id desc limit 1");
+        } catch (SQLException ex) {
+            Logger.getLogger(BookingPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void refreshEntityList() {
         entityListModel.removeAllElements();
         entityList.clear();
         int type = typeComboBox.getSelectedIndex() + 1;
         boolean bookingSlot = (durationComboBox.getSelectedIndex() == 0);
         boolean ac = acYesRadioButton.isSelected();
+        Date startDate = startDatePicker.getDate();
+        Date endDate = startDatePicker.getDate();
+        
         try {
-            String query = String.format("select * from entity where status <> -1 and type = '%d' and booking_slot = '%b' and ac = '%b' order by name collate nocase", type, bookingSlot, ac);
+            String query = String.format("select * from entity e where status <> -1 " +
+                    "and type = '%1d' and booking_slot = '%2b' and ac = '%3b' "+
+//                    "and not exists (select * from booking_item bi where bi.id = e.id and " +
+//                    "(('%4t' > end_date or '%5t' < start_date) or " + 
+//                    "('%4t' = end_date and or '%5t' < start_date))) "+
+                    "order by name collate nocase", type, bookingSlot, ac, startDate, endDate);
             entityList = (ArrayList<Entity>) entityDao.select(query);
         } catch (SQLException ex) {
             Logger.getLogger(Launcher.class.getName()).log(Level.SEVERE, null, ex);
@@ -190,8 +219,8 @@ public class BookingPanel extends javax.swing.JPanel {
         newMenuItem = new javax.swing.JMenuItem();
         editMenuItem = new javax.swing.JMenuItem();
         removeMenuItem = new javax.swing.JMenuItem();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jPanel3 = new javax.swing.JPanel();
+        bookingContainerPanel = new javax.swing.JPanel();
+        bookingFormPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         namePanel = new javax.swing.JPanel();
         nameField = new javax.swing.JTextField();
@@ -239,6 +268,15 @@ public class BookingPanel extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         bookButton = new javax.swing.JButton();
         clearButton = new javax.swing.JButton();
+        homeButton = new javax.swing.JButton();
+        bookingDashboardPanel = new javax.swing.JPanel();
+        newFormButton = new javax.swing.JButton();
+        bookingTableScrollPane = new javax.swing.JScrollPane();
+        bookingTable = new javax.swing.JTable() {
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
         entitySelectionDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         entitySelectionDialog.setTitle("Select Entity");
@@ -520,7 +558,7 @@ public class BookingPanel extends javax.swing.JPanel {
         startDatePanel.setLayout(startDatePanelLayout);
         startDatePanelLayout.setHorizontalGroup(
             startDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(startDatePicker, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+            .addComponent(startDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 206, Short.MAX_VALUE)
         );
         startDatePanelLayout.setVerticalGroup(
             startDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -561,7 +599,7 @@ public class BookingPanel extends javax.swing.JPanel {
         endDatePanelLayout.setHorizontalGroup(
             endDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(endDatePanelLayout.createSequentialGroup()
-                .addComponent(endDatePicker, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                .addComponent(endDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 206, Short.MAX_VALUE)
                 .addContainerGap())
         );
         endDatePanelLayout.setVerticalGroup(
@@ -689,10 +727,7 @@ public class BookingPanel extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1250, 600));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
-        jScrollPane3.setBorder(null);
-        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        jPanel3.setPreferredSize(new java.awt.Dimension(0, 720));
+        bookingContainerPanel.setLayout(new java.awt.CardLayout());
 
         jPanel1.setOpaque(false);
         jPanel1.setLayout(new java.awt.GridBagLayout());
@@ -716,7 +751,7 @@ public class BookingPanel extends javax.swing.JPanel {
             namePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(namePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addContainerGap())
@@ -735,10 +770,7 @@ public class BookingPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
         jPanel1.add(namePanel, gridBagConstraints);
 
         addressPanel.setOpaque(false);
@@ -758,7 +790,7 @@ public class BookingPanel extends javax.swing.JPanel {
             addressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addressPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -777,10 +809,8 @@ public class BookingPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.gridheight = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
         jPanel1.add(addressPanel, gridBagConstraints);
 
         mobile1Panel.setOpaque(false);
@@ -803,7 +833,7 @@ public class BookingPanel extends javax.swing.JPanel {
             mobile1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mobile1PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mobile1Field, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mobile1Field, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -819,11 +849,9 @@ public class BookingPanel extends javax.swing.JPanel {
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
         jPanel1.add(mobile1Panel, gridBagConstraints);
 
         mobile2Panel.setOpaque(false);
@@ -843,7 +871,7 @@ public class BookingPanel extends javax.swing.JPanel {
             mobile2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mobile2PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mobile2Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mobile2Field, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -858,12 +886,9 @@ public class BookingPanel extends javax.swing.JPanel {
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
         jPanel1.add(mobile2Panel, gridBagConstraints);
 
         emailPanel.setOpaque(false);
@@ -881,8 +906,8 @@ public class BookingPanel extends javax.swing.JPanel {
             emailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(emailPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         emailPanelLayout.setVerticalGroup(
@@ -896,13 +921,10 @@ public class BookingPanel extends javax.swing.JPanel {
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
         jPanel1.add(emailPanel, gridBagConstraints);
 
         eventDetailsPanel.setOpaque(false);
@@ -924,7 +946,7 @@ public class BookingPanel extends javax.swing.JPanel {
             eventDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(eventDetailsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(eventDetailsField, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(eventDetailsField, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -940,13 +962,10 @@ public class BookingPanel extends javax.swing.JPanel {
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
         jPanel1.add(eventDetailsPanel, gridBagConstraints);
 
         nameLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -962,47 +981,47 @@ public class BookingPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridheight = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel1.add(addressLabel, gridBagConstraints);
 
         emailLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         emailLabel.setText("Email");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel1.add(emailLabel, gridBagConstraints);
 
         eventDetailsLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         eventDetailsLabel.setText("Event Details");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel1.add(eventDetailsLabel, gridBagConstraints);
 
         mobile1Label.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         mobile1Label.setText("Mobile 1");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel1.add(mobile1Label, gridBagConstraints);
 
         mobile2Label.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         mobile2Label.setText("Mobile 2");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 38);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 46);
         jPanel1.add(mobile2Label, gridBagConstraints);
 
         typePanel.setOpaque(false);
 
         customerTypeButtonGroup.add(memberRadioButton);
         memberRadioButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        memberRadioButton.setSelected(true);
         memberRadioButton.setText("Member");
         memberRadioButton.setActionCommand("1");
         memberRadioButton.setName("memberRadioButton"); // NOI18N
@@ -1090,13 +1109,13 @@ public class BookingPanel extends javax.swing.JPanel {
             .addGroup(billNumberPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(billNumberLabel)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         billNumberPanelLayout.setVerticalGroup(
             billNumberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(billNumberPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(billNumberLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                .addComponent(billNumberLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(4, 4, 4))
         );
 
@@ -1117,13 +1136,13 @@ public class BookingPanel extends javax.swing.JPanel {
             .addGroup(billDatePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(billDateLabel)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         billDatePanelLayout.setVerticalGroup(
             billDatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(billDatePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(billDateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                .addComponent(billDateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1149,7 +1168,17 @@ public class BookingPanel extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         jPanel2.add(jLabel8, gridBagConstraints);
 
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 20);
+        jPanel1.add(jPanel2, gridBagConstraints);
+
         entityTableScrollPane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(40, 75, 99), 2, true));
+        entityTableScrollPane.setPreferredSize(new java.awt.Dimension(454, 300));
         entityTableScrollPane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 entityTableScrollPaneMouseClicked(evt);
@@ -1198,33 +1227,41 @@ public class BookingPanel extends javax.swing.JPanel {
             entityTable.getColumnModel().getColumn(0).setMaxWidth(50);
             entityTable.getColumnModel().getColumn(2).setPreferredWidth(100);
             entityTable.getColumnModel().getColumn(2).setMaxWidth(100);
-            entityTable.getColumnModel().getColumn(2).setCellRenderer(null);
+            entityTable.getColumnModel().getColumn(2).setHeaderValue("Start Date");
             entityTable.getColumnModel().getColumn(3).setPreferredWidth(100);
             entityTable.getColumnModel().getColumn(3).setMaxWidth(100);
-            entityTable.getColumnModel().getColumn(3).setCellRenderer(null);
+            entityTable.getColumnModel().getColumn(3).setHeaderValue("End Date");
             entityTable.getColumnModel().getColumn(4).setPreferredWidth(50);
             entityTable.getColumnModel().getColumn(4).setMaxWidth(50);
+            entityTable.getColumnModel().getColumn(4).setHeaderValue("Qty");
             entityTable.getColumnModel().getColumn(5).setPreferredWidth(100);
             entityTable.getColumnModel().getColumn(5).setMaxWidth(100);
+            entityTable.getColumnModel().getColumn(5).setHeaderValue("Rate");
             entityTable.getColumnModel().getColumn(6).setPreferredWidth(100);
             entityTable.getColumnModel().getColumn(6).setMaxWidth(100);
+            entityTable.getColumnModel().getColumn(6).setHeaderValue("Deposit");
             entityTable.getColumnModel().getColumn(7).setPreferredWidth(100);
             entityTable.getColumnModel().getColumn(7).setMaxWidth(100);
+            entityTable.getColumnModel().getColumn(7).setHeaderValue("Total Rate");
             entityTable.getColumnModel().getColumn(8).setPreferredWidth(100);
             entityTable.getColumnModel().getColumn(8).setMaxWidth(100);
+            entityTable.getColumnModel().getColumn(8).setHeaderValue("Total Deposit");
             entityTable.getColumnModel().getColumn(9).setMinWidth(0);
             entityTable.getColumnModel().getColumn(9).setMaxWidth(0);
+            entityTable.getColumnModel().getColumn(9).setHeaderValue("type");
             entityTable.getColumnModel().getColumn(10).setMinWidth(0);
             entityTable.getColumnModel().getColumn(10).setMaxWidth(0);
+            entityTable.getColumnModel().getColumn(10).setHeaderValue("duration");
             entityTable.getColumnModel().getColumn(11).setMinWidth(0);
             entityTable.getColumnModel().getColumn(11).setMaxWidth(0);
+            entityTable.getColumnModel().getColumn(11).setHeaderValue("ac");
             entityTable.getColumnModel().getColumn(12).setMinWidth(0);
             entityTable.getColumnModel().getColumn(12).setMaxWidth(0);
         }
 
         java.awt.GridBagLayout jPanel4Layout = new java.awt.GridBagLayout();
         jPanel4Layout.columnWidths = new int[] {0, 20, 0, 20, 0};
-        jPanel4Layout.rowHeights = new int[] {0, 10, 0, 10, 0};
+        jPanel4Layout.rowHeights = new int[] {0};
         jPanel4.setLayout(jPanel4Layout);
 
         bookButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -1236,7 +1273,7 @@ public class BookingPanel extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         jPanel4.add(bookButton, gridBagConstraints);
 
@@ -1249,46 +1286,138 @@ public class BookingPanel extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         jPanel4.add(clearButton, gridBagConstraints);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        homeButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        homeButton.setText("Home");
+        homeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                homeButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        jPanel4.add(homeButton, gridBagConstraints);
+
+        javax.swing.GroupLayout bookingFormPanelLayout = new javax.swing.GroupLayout(bookingFormPanel);
+        bookingFormPanel.setLayout(bookingFormPanelLayout);
+        bookingFormPanelLayout.setHorizontalGroup(
+            bookingFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bookingFormPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(entityTableScrollPane)
-                        .addContainerGap())
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(6, 6, 6))))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(bookingFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(entityTableScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1238, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bookingFormPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        bookingFormPanelLayout.setVerticalGroup(
+            bookingFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bookingFormPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(entityTableScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(entityTableScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jScrollPane3.setViewportView(jPanel3);
+        bookingContainerPanel.add(bookingFormPanel, "form");
 
-        add(jScrollPane3);
+        bookingDashboardPanel.setPreferredSize(new java.awt.Dimension(1250, 582));
+
+        newFormButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        newFormButton.setText("New");
+        newFormButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newFormButtonActionPerformed(evt);
+            }
+        });
+
+        bookingTableScrollPane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(40, 75, 99), 2, true));
+        bookingTableScrollPane.setPreferredSize(new java.awt.Dimension(454, 300));
+        bookingTableScrollPane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bookingTableScrollPaneMouseClicked(evt);
+            }
+        });
+
+        bookingTable.setBackground(new java.awt.Color(217, 217, 217));
+        bookingTable.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        bookingTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "S.No", "Name", "id"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        bookingTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        bookingTable.setRowHeight(24);
+        bookingTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        bookingTable.getTableHeader().setResizingAllowed(false);
+        bookingTable.getTableHeader().setReorderingAllowed(false);
+        bookingTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bookingTableMouseClicked(evt);
+            }
+        });
+        bookingTableScrollPane.setViewportView(bookingTable);
+        if (bookingTable.getColumnModel().getColumnCount() > 0) {
+            bookingTable.getColumnModel().getColumn(0).setPreferredWidth(50);
+            bookingTable.getColumnModel().getColumn(0).setMaxWidth(50);
+            bookingTable.getColumnModel().getColumn(2).setMinWidth(0);
+            bookingTable.getColumnModel().getColumn(2).setMaxWidth(0);
+        }
+
+        javax.swing.GroupLayout bookingDashboardPanelLayout = new javax.swing.GroupLayout(bookingDashboardPanel);
+        bookingDashboardPanel.setLayout(bookingDashboardPanelLayout);
+        bookingDashboardPanelLayout.setHorizontalGroup(
+            bookingDashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bookingDashboardPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(bookingDashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bookingDashboardPanelLayout.createSequentialGroup()
+                        .addComponent(newFormButton)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(bookingTableScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1238, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        bookingDashboardPanelLayout.setVerticalGroup(
+            bookingDashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bookingDashboardPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(newFormButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bookingTableScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(233, 233, 233))
+        );
+
+        bookingContainerPanel.add(bookingDashboardPanel, "dashboard");
+
+        add(bookingContainerPanel);
     }// </editor-fold>//GEN-END:initComponents
 
     private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
@@ -1668,6 +1797,32 @@ public class BookingPanel extends javax.swing.JPanel {
     private void startDatePickerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startDatePickerActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_startDatePickerActionPerformed
+
+    private void newFormButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newFormButtonActionPerformed
+        resetForm();
+        CardLayout cl = (CardLayout)(bookingContainerPanel.getLayout());
+        cl.show(bookingContainerPanel, "form");
+    }//GEN-LAST:event_newFormButtonActionPerformed
+
+    private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
+        DefaultTableModel model = (DefaultTableModel) bookingTable.getModel();
+        refreshBookingList();
+        int i = 1;
+        for(Booking b : bookingList) {
+            Object[] data = new Object[]{i++, b, b.getId()};
+            model.addRow(data);
+        }
+        CardLayout cl = (CardLayout)(bookingContainerPanel.getLayout());
+        cl.show(bookingContainerPanel, "dashboard");
+    }//GEN-LAST:event_homeButtonActionPerformed
+
+    private void bookingTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingTableMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bookingTableMouseClicked
+
+    private void bookingTableScrollPaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingTableScrollPaneMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bookingTableScrollPaneMouseClicked
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup acButtonGroup;
@@ -1685,6 +1840,11 @@ public class BookingPanel extends javax.swing.JPanel {
     private javax.swing.JLabel billNumberLabel;
     private javax.swing.JPanel billNumberPanel;
     private javax.swing.JButton bookButton;
+    private javax.swing.JPanel bookingContainerPanel;
+    private javax.swing.JPanel bookingDashboardPanel;
+    private javax.swing.JPanel bookingFormPanel;
+    private javax.swing.JTable bookingTable;
+    private javax.swing.JScrollPane bookingTableScrollPane;
     private javax.swing.JLabel capacityLabel;
     private javax.swing.JButton clearButton;
     private javax.swing.JTextArea commentsField;
@@ -1708,6 +1868,7 @@ public class BookingPanel extends javax.swing.JPanel {
     private javax.swing.JPanel eventDetailsPanel;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
+    private javax.swing.JButton homeButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1724,14 +1885,12 @@ public class BookingPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JRadioButton memberRadioButton;
     private javax.swing.JTextField mobile1Field;
@@ -1743,6 +1902,7 @@ public class BookingPanel extends javax.swing.JPanel {
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JPanel namePanel;
+    private javax.swing.JButton newFormButton;
     private javax.swing.JMenuItem newMenuItem;
     private javax.swing.JRadioButton nonMemberRadioButton;
     private javax.swing.JPanel optionsPanel;

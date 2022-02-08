@@ -6,12 +6,20 @@ package com.mycompany.bookingsystem.Models.Booking;
 
 import com.mycompany.bookingsystem.Dao.Dao;
 import com.mycompany.bookingsystem.Database.DatabaseConnection;
+import com.mycompany.bookingsystem.Helper.Helper;
+import static com.mycompany.bookingsystem.Helper.Helper.dateFormat;
+import static com.mycompany.bookingsystem.Helper.Helper.sqlDateFormat;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,10 +36,16 @@ public class BookingDao implements Dao<Booking> {
     
     @Override
     public int add(Booking booking) throws SQLException {
+        try {
+            booking.setBillDate(new Date(dateFormat.parse(dateFormat.format(booking.getBillDate())).getTime()));
+        } catch (ParseException ex) {
+            Logger.getLogger(BookingDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         String query = "insert into booking (bill_number, bill_date, type, name, address, mobile1, mobile2, email, " + 
                 "eventDetails, total_rate, total_deposit, status) " +
                 "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        
+                
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, String.valueOf(booking.getBillNumber()));
         preparedStatement.setString(2, String.valueOf(booking.getBillDate()));
@@ -81,7 +95,11 @@ public class BookingDao implements Dao<Booking> {
             found = true;
             booking.setId(resultSet.getInt("id"));
             booking.setBillNumber(resultSet.getString("bill_number"));
-            booking.setBillDate(resultSet.getDate("bill_date"));
+            try {
+                booking.setBillDate(sqlDateFormat.parse(resultSet.getString("bill_date")));
+            } catch (ParseException ex) {
+                Logger.getLogger(BookingDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
             booking.setType(resultSet.getInt("type"));
             booking.setName(resultSet.getString("name"));
             booking.setAddress(resultSet.getString("address"));
@@ -119,7 +137,11 @@ public class BookingDao implements Dao<Booking> {
             Booking booking = new Booking();
             booking.setId(resultSet.getInt("id"));
             booking.setBillNumber(resultSet.getString("bill_number"));
-            booking.setBillDate(resultSet.getDate("bill_date"));
+            try {
+                booking.setBillDate(sqlDateFormat.parse(resultSet.getString("bill_date")));
+            } catch (ParseException ex) {
+                Logger.getLogger(BookingDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
             booking.setType(resultSet.getInt("type"));
             booking.setName(resultSet.getString("name"));
             booking.setAddress(resultSet.getString("address"));
@@ -137,6 +159,12 @@ public class BookingDao implements Dao<Booking> {
 
     @Override
     public void update(Booking booking) throws SQLException {
+        try {
+            booking.setBillDate(new Date(dateFormat.parse(dateFormat.format(booking.getBillDate())).getTime()));
+        } catch (ParseException ex) {
+            Logger.getLogger(BookingDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         String query = "update booking set bill_number = ?, bill_date = ?, type = ?, name = ?, address = ?, " +
                 "mobile1 = ?, mobile2 = ?, email = ?, eventDetails = ?, " +
                 "total_rate = ?, total_deposit = ?, status = ? where id = ?";

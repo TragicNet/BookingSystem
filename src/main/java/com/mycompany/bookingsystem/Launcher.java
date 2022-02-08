@@ -6,6 +6,8 @@ package com.mycompany.bookingsystem;
 
 import com.mycompany.bookingsystem.InnerPanels.BookingPanel;
 import com.mycompany.bookingsystem.InnerPanels.InventoryPanel;
+import com.mycompany.bookingsystem.InnerPanels.ReportsPanel;
+import com.mycompany.bookingsystem.InnerPanels.SettingsPanel;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -25,6 +27,8 @@ public class Launcher extends javax.swing.JFrame {
     private final CardLayout cardLayout;
     private final InventoryPanel inventoryPanel;
     private final BookingPanel bookingPanel;
+    private final ReportsPanel reportsPanel;
+    private final SettingsPanel settingsPanel;
     
     /**
      * Creates new form Launcher
@@ -33,18 +37,18 @@ public class Launcher extends javax.swing.JFrame {
         initComponents();
 
         bookingPanel = new BookingPanel(this);
+        settingsPanel = new SettingsPanel(this);
         inventoryPanel = new InventoryPanel(this);
-        
-        mainPanel.add(bookingPanel, "booking");
-        mainPanel.add(inventoryPanel, "inventory");
+        reportsPanel = new ReportsPanel(this);
         
         cardLayout = new CardLayout();
         mainPanel.setLayout(cardLayout);
-        mainPanel.add(bookingPanel, "booking");
-        mainPanel.add(reportsPanel, "reports");
+        mainPanel.add(bookingPanel, "billing");
         mainPanel.add(inventoryPanel, "inventory");
+        mainPanel.add(settingsPanel, "settings");
+        mainPanel.add(reportsPanel, "reports");
         
-        bookingButton.doClick();
+        billingButton.doClick();
         
     }
 
@@ -62,15 +66,13 @@ public class Launcher extends javax.swing.JFrame {
         topPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         sidePanel = new javax.swing.JPanel();
-        bookingButton = new javax.swing.JToggleButton();
         billingButton = new javax.swing.JToggleButton();
         reportsButton = new javax.swing.JToggleButton();
         inventoryButton = new javax.swing.JToggleButton();
+        settingsButton = new javax.swing.JToggleButton();
         exitButton = new javax.swing.JToggleButton();
         mainContainerPanel = new javax.swing.JPanel();
         mainPanel = new javax.swing.JPanel();
-        reportsPanel = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Booking System");
@@ -89,7 +91,7 @@ public class Launcher extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Hall Booking and Billing System");
+        jLabel4.setText("Hall Billing System");
         topPanel.add(jLabel4, new java.awt.GridBagConstraints());
 
         containerPanel.add(topPanel, java.awt.BorderLayout.PAGE_START);
@@ -99,23 +101,6 @@ public class Launcher extends javax.swing.JFrame {
         java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 75, 0);
         flowLayout1.setAlignOnBaseline(true);
         sidePanel.setLayout(flowLayout1);
-
-        bookingButton.setBackground(new java.awt.Color(217, 217, 217));
-        cardsButtonGroup.add(bookingButton);
-        bookingButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        bookingButton.setForeground(new java.awt.Color(255, 255, 255));
-        bookingButton.setText("Booking");
-        bookingButton.setBorder(null);
-        bookingButton.setBorderPainted(false);
-        bookingButton.setContentAreaFilled(false);
-        bookingButton.setFocusPainted(false);
-        bookingButton.setPreferredSize(new java.awt.Dimension(200, 50));
-        bookingButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookingButtonActionPerformed(evt);
-            }
-        });
-        sidePanel.add(bookingButton);
 
         billingButton.setBackground(new java.awt.Color(217, 217, 217));
         cardsButtonGroup.add(billingButton);
@@ -168,6 +153,23 @@ public class Launcher extends javax.swing.JFrame {
         });
         sidePanel.add(inventoryButton);
 
+        settingsButton.setBackground(new java.awt.Color(217, 217, 217));
+        cardsButtonGroup.add(settingsButton);
+        settingsButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        settingsButton.setForeground(new java.awt.Color(255, 255, 255));
+        settingsButton.setText("Settings");
+        settingsButton.setBorder(null);
+        settingsButton.setBorderPainted(false);
+        settingsButton.setContentAreaFilled(false);
+        settingsButton.setFocusPainted(false);
+        settingsButton.setPreferredSize(new java.awt.Dimension(200, 50));
+        settingsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                settingsButtonActionPerformed(evt);
+            }
+        });
+        sidePanel.add(settingsButton);
+
         exitButton.setBackground(new java.awt.Color(217, 217, 217));
         cardsButtonGroup.add(exitButton);
         exitButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -196,31 +198,6 @@ public class Launcher extends javax.swing.JFrame {
         mainPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(40, 75, 99), 0));
         mainPanel.setOpaque(false);
         mainPanel.setLayout(new java.awt.CardLayout());
-
-        reportsPanel.setOpaque(false);
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel11.setText("Reports");
-
-        javax.swing.GroupLayout reportsPanelLayout = new javax.swing.GroupLayout(reportsPanel);
-        reportsPanel.setLayout(reportsPanelLayout);
-        reportsPanelLayout.setHorizontalGroup(
-            reportsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(reportsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel11)
-                .addContainerGap(2321, Short.MAX_VALUE))
-        );
-        reportsPanelLayout.setVerticalGroup(
-            reportsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(reportsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel11)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        mainPanel.add(reportsPanel, "reports");
-
         mainContainerPanel.add(mainPanel);
 
         containerPanel.add(mainContainerPanel, java.awt.BorderLayout.CENTER);
@@ -230,12 +207,12 @@ public class Launcher extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bookingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingButtonActionPerformed
+    private void billingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_billingButtonActionPerformed
         selectCardButton();
 //        bookingPanel.reset();
         CardLayout cl = (CardLayout)(mainPanel.getLayout());
-        cl.show(mainPanel, "booking");
-    }//GEN-LAST:event_bookingButtonActionPerformed
+        cl.show(mainPanel, "billing");
+    }//GEN-LAST:event_billingButtonActionPerformed
 
     private void reportsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportsButtonActionPerformed
         selectCardButton();
@@ -250,9 +227,11 @@ public class Launcher extends javax.swing.JFrame {
         cl.show(mainPanel, "inventory");
     }//GEN-LAST:event_inventoryButtonActionPerformed
 
-    private void billingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_billingButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_billingButtonActionPerformed
+    private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
+        selectCardButton();
+        CardLayout cl = (CardLayout)(mainPanel.getLayout());
+        cl.show(mainPanel, "settings");
+    }//GEN-LAST:event_settingsButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         this.dispose();
@@ -326,17 +305,15 @@ public class Launcher extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton billingButton;
-    private javax.swing.JToggleButton bookingButton;
     private javax.swing.ButtonGroup cardsButtonGroup;
     private javax.swing.JPanel containerPanel;
     private javax.swing.JToggleButton exitButton;
     private javax.swing.JToggleButton inventoryButton;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel mainContainerPanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JToggleButton reportsButton;
-    private javax.swing.JPanel reportsPanel;
+    private javax.swing.JToggleButton settingsButton;
     private javax.swing.JPanel sidePanel;
     private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables

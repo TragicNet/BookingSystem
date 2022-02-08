@@ -17,6 +17,7 @@ import javax.swing.UIManager;
 public class Helper {
     
     public static SimpleDateFormat dateFormat = new SimpleDateFormat( "dd/MM/yy" );
+    public static SimpleDateFormat sqlDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     
     public static void setUIFont(javax.swing.plaf.FontUIResource f) {
         java.util.Enumeration keys = UIManager.getDefaults().keys();
@@ -41,6 +42,11 @@ public class Helper {
     
     public static boolean isValidText(String name) {
         String regex = "^[a-zA-z](?!.* {2}).*[^ ]$";
+        return Helper.regexTester(name, regex);
+    }
+    
+    public static boolean isValidTextWithNumberStart(String name) {
+        String regex = "^[a-zA-z0-9](?!.* {2}).*[^ ]$";
         return Helper.regexTester(name, regex);
     }
     

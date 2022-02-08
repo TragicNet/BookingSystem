@@ -84,7 +84,7 @@ public class InventoryPanel extends javax.swing.JPanel {
         entityJList.setModel(entityListModel);
         refreshEntityList();
         
-        typeButtons[0].setSelected(true);
+        typeButtons[0].doClick();
         
     }
     
@@ -112,7 +112,6 @@ public class InventoryPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         entityJList = new javax.swing.JList<>();
         jPanel2 = new javax.swing.JPanel();
-        newButton = new javax.swing.JButton();
         entityComboBox = new javax.swing.JComboBox<>();
         formPanel = new javax.swing.JPanel();
         typePanel = new javax.swing.JPanel();
@@ -211,18 +210,6 @@ public class InventoryPanel extends javax.swing.JPanel {
 
         jPanel2.setOpaque(false);
 
-        newButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        newButton.setText("New");
-        newButton.setAlignmentX(0.5F);
-        newButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        newButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        newButton.setPreferredSize(new java.awt.Dimension(72, 6));
-        newButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newButtonActionPerformed(evt);
-            }
-        });
-
         entityComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         entityComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Hall", "Room", "Space", "Equipment" }));
         entityComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -237,18 +224,13 @@ public class InventoryPanel extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(entityComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(newButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(entityComboBox, 0, 254, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(entityComboBox)
-                    .addComponent(newButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(entityComboBox)
                 .addContainerGap())
         );
 
@@ -1060,7 +1042,7 @@ public class InventoryPanel extends javax.swing.JPanel {
     private void equipmentRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equipmentRadioButtonActionPerformed
         amountLabel.setText("Quantity");
         amountPanel.setVisible(true);
-        bookingSlotPanel.setVisible(false);
+        bookingSlotPanel.setVisible(true);
         acPanel.setVisible(false);
         inUsePanel.setVisible(true);
         availablePanel.setVisible(true);
@@ -1108,7 +1090,7 @@ public class InventoryPanel extends javax.swing.JPanel {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         int index = entityJList.getSelectedIndex();
 
-        if(!Helper.isValidText(nameField.getText())) {
+        if(!Helper.isValidTextWithNumberStart(nameField.getText())) {
             JOptionPane.showMessageDialog(null, "Invalid Name!");
             nameField.requestFocus();
             return;
@@ -1224,13 +1206,6 @@ public class InventoryPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_entityJListValueChanged
 
-    private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-        entityJList.clearSelection();
-        clearButton.setEnabled(true);
-        deleteButton.setEnabled(false);
-        clearButton.doClick();
-    }//GEN-LAST:event_newButtonActionPerformed
-
     private void entityComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entityComboBoxActionPerformed
         refreshEntityList();
     }//GEN-LAST:event_entityComboBoxActionPerformed
@@ -1315,7 +1290,6 @@ public class InventoryPanel extends javax.swing.JPanel {
     private javax.swing.JSpinner memberRateSpinner;
     private javax.swing.JTextField nameField;
     private javax.swing.JPanel namePanel;
-    private javax.swing.JButton newButton;
     private javax.swing.JSpinner nonMemberDepositSpinner;
     private javax.swing.JSpinner nonMemberRateSpinner;
     private javax.swing.JPanel ratePanel;
