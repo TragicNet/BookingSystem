@@ -6,7 +6,6 @@ package com.mycompany.bookingsystem.Models.Booking;
 
 import com.mycompany.bookingsystem.Dao.Dao;
 import com.mycompany.bookingsystem.Database.DatabaseConnection;
-import com.mycompany.bookingsystem.Helper.Helper;
 import static com.mycompany.bookingsystem.Helper.Helper.dateFormat;
 import static com.mycompany.bookingsystem.Helper.Helper.sqlDateFormat;
 import java.sql.Connection;
@@ -15,7 +14,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -105,6 +103,7 @@ public class BookingDao implements Dao<Booking> {
             booking.setAddress(resultSet.getString("address"));
             booking.setMobile1(resultSet.getString("mobile1"));
             booking.setMobile2(resultSet.getString("mobile2"));
+            booking.setEmail(resultSet.getString("email"));
             booking.setEventDetails(resultSet.getString("eventDetails"));
             booking.setTotalRate(resultSet.getInt("total_rate"));
             booking.setTotalDeposit(resultSet.getInt("total_deposit"));
@@ -146,7 +145,8 @@ public class BookingDao implements Dao<Booking> {
             booking.setName(resultSet.getString("name"));
             booking.setAddress(resultSet.getString("address"));
             booking.setMobile1(resultSet.getString("mobile1"));
-            booking.setMobile1(resultSet.getString("mobile2"));
+            booking.setMobile2(resultSet.getString("mobile2"));
+            booking.setEmail(resultSet.getString("email"));
             booking.setEventDetails(resultSet.getString("eventDetails"));
             booking.setTotalRate(resultSet.getInt("total_rate"));
             booking.setTotalDeposit(resultSet.getInt("total_deposit"));
