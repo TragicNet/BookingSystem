@@ -17,16 +17,18 @@ public class BookingItem {
     int quantity;
     Date startDate;
     Date endDate;
+    int bookingSlot;
 
     public BookingItem() {
     }
 
-    public BookingItem(int bookingId, int entityId, int quantity, Date startDate, Date endDate) {
+    public BookingItem(int bookingId, int entityId, int quantity, Date startDate, Date endDate, int bookingSlot) {
         this.bookingId = bookingId;
         this.entityId = entityId;
         this.quantity = quantity;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.bookingSlot = bookingSlot;
     }
 
     public int getBookingId() {
@@ -69,6 +71,12 @@ public class BookingItem {
         this.endDate = endDate;
     }
 
-    
+    public int getBookingSlot() {
+        return bookingSlot;
+    }
+
+    public void setBookingSlot(int bookingSlot) {
+        this.bookingSlot = bookingSlot;
+    }
     
 }

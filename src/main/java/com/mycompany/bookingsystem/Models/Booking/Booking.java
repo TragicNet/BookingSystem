@@ -144,7 +144,7 @@ public class Booking {
     }
 
     public void setStatus(int status) {
-        this.status = status;
+        this.status = status;   
     }
 
     @Override

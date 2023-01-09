@@ -2,7 +2,7 @@ package com.mycompany.bookingsystem.Models.Entity;
 
 public class Entity {
     int id;
-    String name;
+    public String name;
     int type;
     int amount;
     Boolean ac;

@@ -5,6 +5,10 @@
 package com.mycompany.bookingsystem.Helper;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JTable;
@@ -27,6 +31,24 @@ public class Helper {
             if (value instanceof javax.swing.plaf.FontUIResource)
                 UIManager.put(key, f);
         }
+    }
+    
+    public static List<String> getColumn(List<?> list, String name){
+        List<String> result = new ArrayList<>();
+        for (Object o : list) {
+            try {
+                result.add(o.getClass().getField(name).get(o).toString());
+            } catch (NoSuchFieldException ex) {
+                Logger.getLogger(Helper.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SecurityException ex) {
+                Logger.getLogger(Helper.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalArgumentException ex) {
+                Logger.getLogger(Helper.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(Helper.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return result;
     }
     
     public static boolean regexTester(String string, String regex) {

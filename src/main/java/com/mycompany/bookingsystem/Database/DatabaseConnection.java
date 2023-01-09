@@ -3,6 +3,8 @@ package com.mycompany.bookingsystem.Database;
 import com.mycompany.bookingsystem.Models.Booking.BookingDao;
 import com.mycompany.bookingsystem.Models.BookingItem.BookingItemDao;
 import com.mycompany.bookingsystem.Models.Entity.EntityDao;
+import com.mycompany.bookingsystem.Models.EventType.EventTypeDao;
+import com.mycompany.bookingsystem.Models.Settings.SettingsDao;
 import java.io.File;
 import java.sql.*;
 
@@ -44,6 +46,8 @@ public abstract class DatabaseConnection {
         statement.execute(EntityDao.createQuery);
         statement.execute(BookingDao.createQuery);
         statement.execute(BookingItemDao.createQuery);
+        statement.execute(EventTypeDao.createQuery);
+        statement.execute(SettingsDao.createQuery);
     }
     
 }

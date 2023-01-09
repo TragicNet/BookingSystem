@@ -4,6 +4,7 @@
  */
 package com.mycompany.bookingsystem;
 
+import static com.mycompany.bookingsystem.Helper.Helper.setUIFont;
 import com.mycompany.bookingsystem.InnerPanels.BookingPanel;
 import com.mycompany.bookingsystem.InnerPanels.InventoryPanel;
 import com.mycompany.bookingsystem.InnerPanels.ReportsPanel;
@@ -34,8 +35,13 @@ public class Launcher extends javax.swing.JFrame {
      * Creates new form Launcher
      */
     public Launcher() {
+        
+        setUIFont (new javax.swing.plaf.FontUIResource("Dialog", Font.PLAIN, 18));
+        
         initComponents();
-
+        
+//        UIManager.getLookAndFeel().getDefaults().put("defaultFont", new Font("Calibri", Font.ITALIC, 12));
+        
         bookingPanel = new BookingPanel(this);
         settingsPanel = new SettingsPanel(this);
         inventoryPanel = new InventoryPanel(this);
@@ -79,6 +85,7 @@ public class Launcher extends javax.swing.JFrame {
         setBackground(new java.awt.Color(0, 0, 0));
         setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
         setName("MainFrame"); // NOI18N
+        setResizable(false);
 
         containerPanel.setBackground(new java.awt.Color(217, 217, 217));
         containerPanel.setLayout(new java.awt.BorderLayout());
@@ -191,12 +198,12 @@ public class Launcher extends javax.swing.JFrame {
 
         mainContainerPanel.setBackground(new java.awt.Color(217, 217, 217));
         mainContainerPanel.setOpaque(false);
-        mainContainerPanel.setPreferredSize(new java.awt.Dimension(1395, 700));
         mainContainerPanel.setLayout(new javax.swing.BoxLayout(mainContainerPanel, javax.swing.BoxLayout.X_AXIS));
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
         mainPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(40, 75, 99), 0));
         mainPanel.setOpaque(false);
+        mainPanel.setPreferredSize(new java.awt.Dimension(100, 100));
         mainPanel.setLayout(new java.awt.CardLayout());
         mainContainerPanel.add(mainPanel);
 
@@ -212,6 +219,7 @@ public class Launcher extends javax.swing.JFrame {
 //        bookingPanel.reset();
         CardLayout cl = (CardLayout)(mainPanel.getLayout());
         cl.show(mainPanel, "billing");
+        bookingPanel.focusIfNew();
     }//GEN-LAST:event_billingButtonActionPerformed
 
     private void reportsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportsButtonActionPerformed
@@ -298,7 +306,6 @@ public class Launcher extends javax.swing.JFrame {
                 frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
-                frame.setResizable(false);
             }
         });
     }

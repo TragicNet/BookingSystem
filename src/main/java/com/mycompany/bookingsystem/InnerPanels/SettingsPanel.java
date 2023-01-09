@@ -4,12 +4,23 @@
  */
 package com.mycompany.bookingsystem.InnerPanels;
 
+import com.mycompany.bookingsystem.Launcher;
 import com.mycompany.bookingsystem.Models.Entity.Entity;
 import com.mycompany.bookingsystem.Models.Entity.EntityDao;
+import com.mycompany.bookingsystem.Models.EventType.EventType;
+import com.mycompany.bookingsystem.Models.EventType.EventTypeDao;
+import com.mycompany.bookingsystem.Models.Settings.Settings;
+import com.mycompany.bookingsystem.Models.Settings.SettingsDao;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -18,6 +29,12 @@ import javax.swing.JRadioButton;
 public class SettingsPanel extends javax.swing.JPanel {
 
     private final JFrame frame;
+    private SettingsDao settingsDao;
+    private EventTypeDao eventTypeDao;
+    private List<Settings> settingsList;
+    private List<EventType> eventTypeList;
+    private List<Integer> removedEventTypes;
+    
     
     /**
      * Creates new form InventoryPanel
@@ -26,6 +43,44 @@ public class SettingsPanel extends javax.swing.JPanel {
         this.frame = frame;
         initComponents();
 
+        settingsDao = new SettingsDao();
+        eventTypeDao = new EventTypeDao();
+        
+        try {
+            settingsList = (ArrayList<Settings>) settingsDao.getAll();
+            removedEventTypes = new ArrayList<>();
+            if(settingsList.isEmpty()) {
+                settingsDao.add(new Settings(0, "cancelValue0", cancelValue0.getValue().toString(), 0));
+                settingsDao.add(new Settings(0, "cancelValue1", cancelValue1.getValue().toString(), 0));
+                settingsDao.add(new Settings(0, "cancelValue2", cancelValue2.getValue().toString(), 0));
+                settingsDao.add(new Settings(0, "cancelValue3", cancelValue3.getValue().toString(), 0));
+                settingsList = (ArrayList<Settings>) settingsDao.getAll();
+            }
+            
+            cancelValue0.setValue(Integer.valueOf(settingsList.get(0).getValue()));
+            cancelValue1.setValue(Integer.valueOf(settingsList.get(1).getValue()));
+            cancelValue2.setValue(Integer.valueOf(settingsList.get(2).getValue()));
+            cancelValue3.setValue(Integer.valueOf(settingsList.get(3).getValue()));
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        refreshEventTypeList();
+
+    }
+
+    private void refreshEventTypeList() {
+        try {
+            eventTypeList = (ArrayList<EventType>) eventTypeDao.getAll();
+        } catch (SQLException ex) {
+            Logger.getLogger(SettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        DefaultTableModel model = (DefaultTableModel) eventTypeTable.getModel();
+        model.setRowCount(0);
+        for (EventType eventType : eventTypeList) {
+            model.addRow(new Object[] {eventType.getName(), eventType.getId()});
+        }
     }
 
     /**
@@ -44,17 +99,23 @@ public class SettingsPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        cancelValue3 = new javax.swing.JSpinner();
         jLabel7 = new javax.swing.JLabel();
-        jSpinner2 = new javax.swing.JSpinner();
+        cancelValue2 = new javax.swing.JSpinner();
         jLabel8 = new javax.swing.JLabel();
-        jSpinner3 = new javax.swing.JSpinner();
+        cancelValue1 = new javax.swing.JSpinner();
         jLabel9 = new javax.swing.JLabel();
         memberChargesPanel = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jSpinner4 = new javax.swing.JSpinner();
+        cancelValue0 = new javax.swing.JSpinner();
         jLabel11 = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
+        eventTypeListPanel = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        addEventTypeButton = new javax.swing.JButton();
+        removeEventTypeButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        eventTypeTable = new javax.swing.JTable();
 
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1683, 700));
@@ -63,8 +124,10 @@ public class SettingsPanel extends javax.swing.JPanel {
         jLabel1.setText("Settings");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cancellation Charges", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
+        jPanel1.setOpaque(false);
 
         nonMemberChargesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Non-Member", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
+        nonMemberChargesPanel.setOpaque(false);
         java.awt.GridBagLayout nonMemberChargesPanelLayout = new java.awt.GridBagLayout();
         nonMemberChargesPanelLayout.columnWidths = new int[] {0, 20, 0, 20, 0};
         nonMemberChargesPanelLayout.rowHeights = new int[] {0, 10, 0, 10, 0, 10, 0, 10, 0};
@@ -94,13 +157,13 @@ public class SettingsPanel extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         nonMemberChargesPanel.add(jLabel6, gridBagConstraints);
 
-        jSpinner1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 5));
+        cancelValue3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cancelValue3.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 5));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        nonMemberChargesPanel.add(jSpinner1, gridBagConstraints);
+        nonMemberChargesPanel.add(cancelValue3, gridBagConstraints);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setText("%");
@@ -110,13 +173,13 @@ public class SettingsPanel extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         nonMemberChargesPanel.add(jLabel7, gridBagConstraints);
 
-        jSpinner2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 5));
+        cancelValue2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cancelValue2.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 5));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        nonMemberChargesPanel.add(jSpinner2, gridBagConstraints);
+        nonMemberChargesPanel.add(cancelValue2, gridBagConstraints);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setText("%");
@@ -126,13 +189,13 @@ public class SettingsPanel extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         nonMemberChargesPanel.add(jLabel8, gridBagConstraints);
 
-        jSpinner3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jSpinner3.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 5));
+        cancelValue1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cancelValue1.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 5));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        nonMemberChargesPanel.add(jSpinner3, gridBagConstraints);
+        nonMemberChargesPanel.add(cancelValue1, gridBagConstraints);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel9.setText("%");
@@ -143,6 +206,7 @@ public class SettingsPanel extends javax.swing.JPanel {
         nonMemberChargesPanel.add(jLabel9, gridBagConstraints);
 
         memberChargesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Member", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
+        memberChargesPanel.setOpaque(false);
         java.awt.GridBagLayout memberChargesPanelLayout = new java.awt.GridBagLayout();
         memberChargesPanelLayout.columnWidths = new int[] {0, 20, 0, 20, 0};
         memberChargesPanelLayout.rowHeights = new int[] {0};
@@ -156,13 +220,13 @@ public class SettingsPanel extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         memberChargesPanel.add(jLabel10, gridBagConstraints);
 
-        jSpinner4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jSpinner4.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 5));
+        cancelValue0.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cancelValue0.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 5));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        memberChargesPanel.add(jSpinner4, gridBagConstraints);
+        memberChargesPanel.add(cancelValue0, gridBagConstraints);
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setText("%");
@@ -194,12 +258,114 @@ public class SettingsPanel extends javax.swing.JPanel {
         );
 
         saveButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/save-icon.png"))); // NOI18N
         saveButton.setText("Save");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveButtonActionPerformed(evt);
             }
         });
+
+        eventTypeListPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Event Types", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
+        eventTypeListPanel.setOpaque(false);
+        eventTypeListPanel.setPreferredSize(new java.awt.Dimension(250, 688));
+        eventTypeListPanel.setVerifyInputWhenFocusTarget(false);
+
+        jPanel2.setOpaque(false);
+
+        addEventTypeButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        addEventTypeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/Science-Plus2-Math-icon.png"))); // NOI18N
+        addEventTypeButton.setText("");
+        addEventTypeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addEventTypeButtonActionPerformed(evt);
+            }
+        });
+
+        removeEventTypeButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        removeEventTypeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/Science-Minus2-Math-icon.png"))); // NOI18N
+        removeEventTypeButton.setToolTipText("");
+        removeEventTypeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeEventTypeButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(addEventTypeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(removeEventTypeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(removeEventTypeButton)
+                    .addComponent(addEventTypeButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        eventTypeTable.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        eventTypeTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null}
+            },
+            new String [] {
+                "Name", "id"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        eventTypeTable.setColumnSelectionAllowed(true);
+        eventTypeTable.setRowHeight(24);
+        eventTypeTable.setTableHeader(null);
+        jScrollPane1.setViewportView(eventTypeTable);
+        eventTypeTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (eventTypeTable.getColumnModel().getColumnCount() > 0) {
+            eventTypeTable.getColumnModel().getColumn(1).setMinWidth(0);
+            eventTypeTable.getColumnModel().getColumn(1).setPreferredWidth(0);
+            eventTypeTable.getColumnModel().getColumn(1).setMaxWidth(0);
+        }
+
+        javax.swing.GroupLayout eventTypeListPanelLayout = new javax.swing.GroupLayout(eventTypeListPanel);
+        eventTypeListPanel.setLayout(eventTypeListPanelLayout);
+        eventTypeListPanelLayout.setHorizontalGroup(
+            eventTypeListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(eventTypeListPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(eventTypeListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        eventTypeListPanelLayout.setVerticalGroup(
+            eventTypeListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(eventTypeListPanelLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -209,9 +375,13 @@ public class SettingsPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saveButton))
-                .addContainerGap(1371, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(saveButton)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(eventTypeListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(1154, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -219,19 +389,76 @@ public class SettingsPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(eventTypeListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(66, 66, 66)
                 .addComponent(saveButton)
-                .addContainerGap(366, Short.MAX_VALUE))
+                .addContainerGap(306, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-
+        try {   
+            settingsList.get(0).setValue(cancelValue0.getValue().toString());
+            settingsList.get(1).setValue(cancelValue1.getValue().toString());
+            settingsList.get(2).setValue(cancelValue2.getValue().toString());
+            settingsList.get(3).setValue(cancelValue3.getValue().toString());
+            
+            for (Settings settings : settingsList) {
+                settingsDao.update(settings);
+            }
+            
+            DefaultTableModel model = (DefaultTableModel) eventTypeTable.getModel();
+            for (int i = 0; i < model.getRowCount(); i++) {
+                String name = (String) model.getValueAt(i, 0);
+                EventType eventType = new EventType();
+                eventType.setName(name);
+                if(model.getValueAt(i, 1).equals("")) {
+                    eventTypeDao.add(eventType);
+                } else {
+                    eventType.setId((int) model.getValueAt(i, 1));
+                    eventTypeDao.update(eventType);
+                }
+            }
+            
+            for (int id : removedEventTypes) {
+                eventTypeDao.delete(id);
+            }
+            removedEventTypes.clear();
+            refreshEventTypeList();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(SettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_saveButtonActionPerformed
-    
+
+    private void removeEventTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeEventTypeButtonActionPerformed
+        DefaultTableModel model = (DefaultTableModel) eventTypeTable.getModel();
+        int row = eventTypeTable.getSelectedRow();
+        if(!model.getValueAt(row, 1).equals("")) {
+            removedEventTypes.add((Integer) model.getValueAt(row, 1));
+        }
+        model.removeRow(row);
+    }//GEN-LAST:event_removeEventTypeButtonActionPerformed
+
+    private void addEventTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEventTypeButtonActionPerformed
+        DefaultTableModel model = (DefaultTableModel) eventTypeTable.getModel();
+        model.addRow(new Object[] { "", "" });
+        eventTypeTable.changeSelection(eventTypeTable.getRowCount()-1, 0, false, false);
+        eventTypeTable.requestFocus();
+        eventTypeTable.editCellAt(eventTypeTable.getRowCount()-1, 0);
+    }//GEN-LAST:event_addEventTypeButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addEventTypeButton;
+    private javax.swing.JSpinner cancelValue0;
+    private javax.swing.JSpinner cancelValue1;
+    private javax.swing.JSpinner cancelValue2;
+    private javax.swing.JSpinner cancelValue3;
+    private javax.swing.JPanel eventTypeListPanel;
+    private javax.swing.JTable eventTypeTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -242,12 +469,11 @@ public class SettingsPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JSpinner jSpinner3;
-    private javax.swing.JSpinner jSpinner4;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel memberChargesPanel;
     private javax.swing.JPanel nonMemberChargesPanel;
+    private javax.swing.JButton removeEventTypeButton;
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
 }
